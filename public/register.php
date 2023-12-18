@@ -21,7 +21,7 @@ if(isset($_SESSION['usuario']))
 <body>
   <div class="container">
 <div class="nav">
-<a class="return-btn" href="">Página Principal</a>   
+<a class="return-btn" href="index.php">Página Principal</a>   
 
 <a class="login-btn" href="login.php">Inicia sesión</a>
 </div>

@@ -10,7 +10,7 @@
 <body>
   <div class="container">
 <div class="nav">
-<a class="return-btn" href="">Pagina Principal</a>   
+<a class="return-btn" href="index.php">Pagina Principal</a>   
 
 <a class="login-btn" href="register.php">Registrate</a>
 </div>
