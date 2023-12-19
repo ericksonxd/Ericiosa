@@ -41,9 +41,10 @@
 				<nav class="navbar container">
 					<i class="fa-solid fa-bars"></i>
 					<ul class="menu">
-						<li><a href="#">Inicio</a></li>
-						<li><a href="#">Catalogo</a></li>
+						<li><a href="index.php">Inicio</a></li>
+						<li><a href="catalogo.php">Catalogo</a></li>
 						<li><a href="#">Cursos</a></li>
+						<li><a href="#">Encargos</a></li>	
 						<li><a href="#">Redes Sociales</a></li>
 					</ul>
 
@@ -61,7 +62,7 @@
 			<div class="content-banner">
 				<p>Magia en papel</p>
 				<h2>Clases Online y Tutoriales	<br />Papelería Creativa para cumpleaños y eventoso</h2>
-				<a href="#">explora el catálogo</a>
+				<a href="catalogo.php">explora el catálogo</a>
 			</div>
 		</section>
 
@@ -76,10 +77,10 @@
 					</div>
 				</div>
 				<div class="card-feature">
-				<i class="fa-solid fa-wallet"></i>
+				<i class="fa-solid fa-book-open"></i>
 					<div class="feature-content">
-                     <a href="" class="ws" ><span>Facilidad de pagos</span></a>
-						<p>Compra con el medio de tu preferncia</p>
+                     <a href="catalogo.php" class="ws" ><span>Catalogo de Productos</span></a>
+						<p>Explora nuestros mejores productos</p>
 					</div>
 				</div>
 				<div class="card-feature">
@@ -101,7 +102,7 @@
 			</section>
 
 			<section class="container top-categories">
-				<h1 class="heading-1">Categorias</h1>		
+				<h1 class="heading-1">Secciones</h1>		
 				<div class="container-categories">
 					<div class="card-category category-encargos">
 						<p>Encargos</p>
@@ -109,7 +110,7 @@
 					</div>
 					<div class="card-category category-productos">
 						<p>Productos</p>
-						<a href="" class="ws"><span>Ver más</span></a>  
+						<a href="catalogo.php" class="ws"><span>Ver más</span></a>  
 					</div>
 					<div class="card-category category-cursos">
 						<p>Cursos</p>
@@ -119,12 +120,13 @@
 			</section>
 
 			<section class="container top-products">
-				<h1 class="heading-1">Mejores Productos</h1>
+				<h1 class="heading-1">Productos Destacados</h1>
 				<div class="container-products">
 					<!-- Producto 1 -->
 					<div class="card-product">
+						
 						<div class="container-img">
-							<img class="card-img" src="../public/css/images/producto1.jpg" alt="Cafe Irish" />
+						<a href="" class="ws" ><img class="card-img" src="../public/css/images/producto1.jpg" alt="" /></a>	
 							<span class="discount">-0%</span>
 							<div class="button-group">
 								<span>
@@ -142,7 +144,7 @@
 							<div class="separe">
 	
 							</div>
-							<h3>Primera Comunion</h3>
+		                    <a href="" class="product-link" > Primera Comunion</a>
 							<span class="add-cart">
 								<i class="fa-solid fa-basket-shopping"></i>
 							</span>
@@ -152,7 +154,9 @@
 					<!-- Producto 2 -->
 					<div class="card-product">
 						<div class="container-img">
-							<img class="card-img" src="../public/css/images/producto2.jpg" alt="Cafe Irish" />
+
+						<a href="" class="ws" ><img class="card-img" src="../public/css/images/producto2.jpg" alt="" /></a>
+							
 							<span class="discount">-0%</span>
 							<div class="button-group">
 								<span>
@@ -169,7 +173,7 @@
 						<div class="content-card-product">
 							<div class="separe">
 							</div>
-							<h3>Cajitas Princess</h3>
+							<a href="" class="product-link">Cajitas Princess</a>
 							<span class="add-cart">
 								<i class="fa-solid fa-basket-shopping"></i>
 							</span>
@@ -179,7 +183,8 @@
 					<!--  -->
 					<div class="card-product">
 						<div class="container-img">
-							<img class="card-img" src="../public/css/images/producto3.jpg" alt="Cafe Irish" />
+							<a href="" class="ws" >	<img class="card-img" src="../public/css/images/producto3.jpg" alt="" /></a>
+						
 							<span class="discount">-0%</span>
 							<div class="button-group">
 								<span>
@@ -196,7 +201,7 @@
 						<div class="content-card-product">
 							<div class="separe">
 							</div>
-							<h3>Cajita Cat in The Hat</h3>
+				            <a href="" class="product-link">Cajita Cat in The Hat</a>
 							<span class="add-cart">
 								<i class="fa-solid fa-basket-shopping"></i>
 							</span>
@@ -206,7 +211,9 @@
 					<!--  -->
 					<div class="card-product">
 						<div class="container-img">
-							<img class="card-img" src="../public/css/images/producto4.jpg" alt="Cafe Irish" />
+
+						<a href="" class="ws" ><img class="card-img" src="../public/css/images/producto4.jpg" alt="" /></a>
+					
 							<span class="discount">-0%</span>
 							<div class="button-group">
 								<span>
@@ -223,7 +230,7 @@
 						<div class="content-card-product">
 							<div class="separe">
 							</div>
-							<h3>Spiderman Cake Topper</h3>
+							<a href="" class="product-link">Spiderman Cake Topper</a>
 							<span class="add-cart">
 								<i class="fa-solid fa-basket-shopping"></i>
 							</span>

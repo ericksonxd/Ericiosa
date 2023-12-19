@@ -439,10 +439,11 @@ transition:0.3s ;
 
 .card-product {
 	background-color: #fff;
-	padding: 2rem 3rem;
+	padding: 0.5rem 2rem;
 	border-radius: 0.5rem;
 	cursor: pointer;
 	box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+	margin: 1rem;
 }
 
 .card-product:hover{
@@ -1028,7 +1029,20 @@ color: black;
 }
 
 
-a.product-link {
+.catalogo-content{
+	display: grid;
+	grid-template-rows: repeat(auto-fit, minmax(20rem, 1fr));
+	grid-template-areas: "a a a a a"
+						"b b b b b"
+}
+
+.catalogo-content {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(30rem, min-content));
+	grid-template-rows: repeat(auto-fit, minmax(20rem, 1fr));
+  }
+
+  a.product-link {
 	text-decoration: none;
 	grid-row: 2/3;
 	grid-column: 1/-1;
