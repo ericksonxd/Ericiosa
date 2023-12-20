@@ -73,100 +73,103 @@
 
 			<div>
 				<div class="card-category category-menta">
-					<p class="menta"  >NIVEL MENTA</p>
+					<p class="menta">NIVEL MENTA</p>
 					<a href="https://www.patreon.com/ericiosa?l=es" class="ws"><span>Ver más</span></a>
 				</div>
-               <div class="card-holder">
-			   <h2>Incluye:</h2>
-			   <h3>
-			   - Acceso a las publicaciones de mi página de patreon previas.
-<br>
-- 2 Archivos mensuales.
-<br>
-- Consejos cortos.
-<br>
-- Preventa de clases.
-<br>
-<br>
-<br>
-<br>
-<a class="product-link" href="https://www.patreon.com/checkout/ericiosa?rid=8216220">Suscribete Ahora por $9/mes</a>
-<br>
- <br>
-			   </h3>
-			   </div>
-			
+				<div class="card-holder">
+					<h2>Incluye:</h2>
+					<h3>
+						- Acceso a las publicaciones de mi página de patreon previas.
+						<br>
+						- 2 Archivos mensuales.
+						<br>
+						- Consejos cortos.
+						<br>
+						- Preventa de clases.
+						<br>
+						<br>
+						<br>
+						<br>
+						<a class="product-link" href="https://www.patreon.com/checkout/ericiosa?rid=8216220">Suscribete
+							Ahora por $9/mes</a>
+						<br>
+						<br>
+					</h3>
+				</div>
+
 			</div>
 
 
 			<div>
 
 				<div class="card-category category-celeste">
-					<p class="celeste" >NIVEL CELESTE</p>
+					<p class="celeste">NIVEL CELESTE</p>
 					<a href="https://www.patreon.com/ericiosa?l=es" class="ws"><span>Ver más</span></a>
 				</div>
 				<div class="card-holder">
-				<h2>Incluye:</h2>
-			   <h3>
-			   - Preventa de clases.
-<br>
-- 2 Archivos mensuales.
- <br>
- - Breves consejos al mes.
-<br>
-- Descuento del 5% en toda mi tienda de archivos.
-<br>
-- Descuento del 10% en todas las clases.
-<br>
-- 1 Reunión en vivo bimestral (Quedara grabada).  
-<br>	
-<br>
-<br>
-<br>
-<a class="product-link" href="https://www.patreon.com/checkout/ericiosa?rid=8216233">Suscribete Ahora por $18/mes</a>
-<br>
-<br>
+					<h2>Incluye:</h2>
+					<h3>
+						- Preventa de clases.
+						<br>
+						- 2 Archivos mensuales.
+						<br>
+						- Breves consejos al mes.
+						<br>
+						- Descuento del 5% en toda mi tienda de archivos.
+						<br>
+						- Descuento del 10% en todas las clases.
+						<br>
+						- 1 Reunión en vivo bimestral (Quedara grabada).
+						<br>
+						<br>
+						<br>
+						<br>
+						<a class="product-link" href="https://www.patreon.com/checkout/ericiosa?rid=8216233">Suscribete
+							Ahora por $18/mes</a>
+						<br>
+						<br>
 
-			
-			</h3>
-			   </div>
+
+					</h3>
+				</div>
 			</div>
 
 			<div>
 
 				<div class="card-category category-violeta">
-					<p class="violeta" >NIVEL VIOLETA</p>
+					<p class="violeta">NIVEL VIOLETA</p>
 					<a href="https://www.patreon.com/ericiosa?l=es" class="ws"><span>Ver más</span></a>
 				</div>
 				<div class="card-holder">
 					<h2>Incluye:</h2>
-			   <h3>
+					<h3>
 
 
-			   - Preventa en clases.
-<br>
-- Archivos mensuales.
-<br>
-- Video de procesos y los materiales que se ha usado en archivo.
-<br>
-- Publicaciones de short tips.
-<br>
-- Descuento del 10% en toda mi tienda de archivos.
-<br>
-- Descuento del 15% en todas las clases.
-<br>
-- Reunión en vivo bimestral (Quedara grabada).
-<br>
-- Clase bimestral exclusiva con proyecto.
-<br>
-- Acceso perpetuo a las publicaciones de mi página de patreon.
-<br>
-<br>
-<a class="product-link" href="https://www.patreon.com/checkout/ericiosa?rid=8216265">      Suscribete Ahora por $27/mes</a>
-<br>
-<br>
-			   </h3>
-			   </div>
+						- Preventa en clases.
+						<br>
+						- Archivos mensuales.
+						<br>
+						- Video de procesos y los materiales que se ha usado en archivo.
+						<br>
+						- Publicaciones de short tips.
+						<br>
+						- Descuento del 10% en toda mi tienda de archivos.
+						<br>
+						- Descuento del 15% en todas las clases.
+						<br>
+						- Reunión en vivo bimestral (Quedara grabada).
+						<br>
+						- Clase bimestral exclusiva con proyecto.
+						<br>
+						- Acceso perpetuo a las publicaciones de mi página de patreon.
+						<br>
+						<br>
+						<a class="product-link" href="https://www.patreon.com/checkout/ericiosa?rid=8216265"> Suscribete
+							Ahora por $27/mes</a>
+						<br>
+						<br>
+					</h3>
+				</div>
 			</div>
 
 
