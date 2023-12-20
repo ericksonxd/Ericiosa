@@ -1,15 +1,13 @@
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Ericiosa - Catalogo</title>
-    <link rel="stylesheet" href="css/catalogostyle.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
+<meta charset="UTF-8">
+<title>Ericiosa - Detalles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/productstyle.css">
 </head>
+
 <body>
 <header>
 			<div class="container-hero">
@@ -47,9 +45,8 @@
 						<li><a href="index.php">Inicio</a></li>
 						<li><a href="catalogo.php">Catalogo</a></li>
 						<li><a href="cursos.php">Cursos</a></li>
-                        <li><a href="#">Encargos</a></li>
+						<li><a href="#">Encargos</a></li>	
 						<li><a href="#">Redes Sociales</a></li>
-
 					</ul>
 
 					<form class="search-form">
@@ -61,58 +58,76 @@
 				</nav>
 			</div>
 		</header>
+
+      
+
 <section>
-<main  class="main-content" >
 
-
-<h1 class="heading-1" >Catalogo de productos</h1>
-
-<div class="catalogo-content">
-
-
-
-<div class="card-product">
-						
-						<div class="container-img">
-						<a href="product.php" class="ws" ><img class="card-img" src="../public/css/images/producto1.jpg" alt="" /></a>	
-							<span class="discount">-0%</span>
-							<div class="button-group">
-								<span>
-									<i class="fa-regular fa-eye"></i>
-								</span>
-								<span>
-									<i class="fa-regular fa-heart"></i>
-								</span>
-								<span>
-									<i class="fa-solid fa-code-compare"></i>
-								</span>
-							</div>
-						</div>
-						<div class="content-card-product">
-							<div class="separe">
+<main class="main-content" >
 	
-							</div>
-		                    <a href="product.php" class="product-link" > Primera Comunion</a>
-							<span class="add-cart">
-								<i class="fa-solid fa-basket-shopping"></i>
+		<div class="container-product">
+  <div class="box">
+  <div class="images">
+  <div class="img-holder active" onclick="changeImage('css/images/producto1.jpg')">
+    <img id="mainImage" src="css/images/producto1.jpg">
+  </div>
+  <div class="img-holder" onclick="changeImage('css/images/producto1.jpg')">
+    <img src="css/images/producto1.jpg">
+  </div>
+  <div class="img-holder" onclick="changeImage('css/images/producto2.jpg')">
+    <img src="css/images/producto2.jpg">
+  </div>
+  <div class="img-holder" onclick="changeImage('css/images/producto3.jpg')">
+    <img src="css/images/producto3.jpg">
+  </div>
+</div>
+	  <div class="basic-info">
+		  <h1>Nombre de producto</h1>
+		  <span class="actions" > <i class="fa-solid fa-heart" ></i> <i class="fa-solid fa-code-compare"></i> </span>
+
+	
+		  <span>$0.00</span>
+		  <div class="options">
+			  <a href="#" >Comprar Ahora</a>
+			  <a href="#">Añadir Al carrito</a>
+		  </div>
+	  </div>
+	  <div class="description">
+		  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus temporibus corporis repudiandae, consectetur nostrum nisi commodi placeat rerum molestias numquam nihil accusantium deleniti! Enim, nesciunt a quis amet hic officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae nemo accusantium tempora facere doloremque cum iusto, ut neque, fuga omnis libero laborum ullam. At dolorum qui atque labore illo dignissimos.</p>
+		  
+		 <span><h2>Ver Producto en:</h2></span>
+		  <div class="social-icons">
+							  <span class="facebook">
+							  <a href=""><i class="fa-brands fa-facebook-f"></i></a>
 							</span>
-							<p class="price">$0.00 <span>$0.00</span></p>
+
+							<span class="youtube">
+
+							<a href=""><i class="fa-brands fa-youtube"></i></a>
+				
+							</span>
+							<span class="pinterest">
+							<a href=""><i class="fa-brands fa-pinterest-p"></i></a>
+								
+							</span>
+							<span class="instagram">
+								<a href=""><i class="fa-brands fa-instagram"></i></a>
+				
+							</span>
 						</div>
 					</div>
-                   
-                    
-      </div>
+	  </div>
+  </div>
+</div>
 
 
+	 </main>
 
 
-</main>
 </section>
+		
 
-
-
-
-        <footer class="footer">
+		<footer class="footer">
 			<div class="container container-footer">
 				<div class="menu-footer">
 					<div class="contact-info">
@@ -189,10 +204,20 @@
 		</footer>
 
 
+
+		<script>
+  function changeImage(newSrc) {
+    var mainImage = document.getElementById('mainImage');
+    mainImage.src = newSrc;
+  }
+</script>
 		<script
 		
 			src="https://kit.fontawesome.com/81581fb069.js"
 			crossorigin="anonymous"
 		></script>
+		<script src="simpleParallax.js"></script>
+
 </body>
+
 </html>

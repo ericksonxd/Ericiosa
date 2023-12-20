@@ -43,7 +43,7 @@
 					<ul class="menu">
 						<li><a href="index.php">Inicio</a></li>
 						<li><a href="catalogo.php">Catalogo</a></li>
-						<li><a href="#">Cursos</a></li>
+						<li><a href="cursos.php">Cursos</a></li>
 						<li><a href="#">Encargos</a></li>	
 						<li><a href="#">Redes Sociales</a></li>
 					</ul>
@@ -86,7 +86,7 @@
 				<div class="card-feature">
 					<i class="fa-solid fa-gift"></i>
 					<div class="feature-content">
-					<a href="" class="ws" >	<span>Aprende con nuestros cursos</span></a>
+					<a href="cursos.php" class="ws" >	<span>Aprende con nuestros cursos</span></a>
 
 						<p>Papeleria Creativa, Decoraciones y más</p>
 					</div>
@@ -114,7 +114,7 @@
 					</div>
 					<div class="card-category category-cursos">
 						<p>Cursos</p>
-						<a href="" class="ws"><span>Ver más</span></a>  
+						<a href="cursos.php" class="ws"><span>Ver más</span></a>  
 					</div>
 				</div>
 			</section>

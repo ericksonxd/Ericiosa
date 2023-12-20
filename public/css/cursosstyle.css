@@ -33,6 +33,10 @@ html {
 	font-size: 3rem;
 }
 
+body{
+background-color: var(--background-color);
+
+}
 /* ********************************** */
 /*               HEADER               */
 /* ********************************** */
@@ -328,50 +332,80 @@ html {
 }
 
 .card-category {
-	height: 20rem;
+	height: 40rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	border-radius: 2rem;
+	border-radius: 100%;
 	gap: 2rem;
 	box-shadow: 5px 5px 20px;
 }
+
+.card-holder {
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content:center;
+	border-radius: 2rem;
+	gap: 2rem;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	box-shadow: #565656 3px 3px 20px;
+	background-color: var(--primary-color);
+}
+
+.card-holder h2{
+justify-content: baseline;
+}
+
 
 .card-category:hover{
 transition:0.3s ;
 	scale: 1.03;
 }
 
-.category-encargos{
-	background-image: linear-gradient(#00000080, #00000080),
-		url('images/encargos.jpg');
+.category-menta{
+	background-image: linear-gradient(#00000080, #51505080),
+		url('images/curso1.png');
 	background-size: cover;
 	background-position: bottom;
 	background-repeat: no-repeat;
 }
 
-.category-productos {
-	background-image: linear-gradient(#00000080, #00000080),
-		url('images/productos.jpg');
+.category-celeste {
+	background-image: linear-gradient(#00000080, #51505080),
+		url('images/curso2.png');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 }
 
-.category-cursos {
-	background-image: linear-gradient(#00000080, #00000080),
-		url('images/cursos.jpg');
+.category-violeta {
+	background-image: linear-gradient(#00000080, #51505080),	
+		url('images/curso3.png');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 }
 
 .card-category p {
-	font-size: 2.5rem;
-	color: #fff;
+	font-size: 3rem;
 	text-transform: capitalize;
 	position: relative;
+}
+
+.category-menta{
+	color: rgb(154, 255, 226);
+}
+
+.category-celeste{
+	color: #7dd1ff;
+}
+
+.category-violeta{
+ color: #d9a0ff;
 }
 
 .card-category p::after {
@@ -1043,6 +1077,6 @@ a.product-link {
 
   a.product-link:hover{
 	
-		color: var(--primary-color);
+	color: rgb(104, 80, 237);
 	
   }
