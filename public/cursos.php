@@ -47,7 +47,7 @@
 					<li><a href="catalogo.php">Catalogo</a></li>
 					<li><a href="cursos.php">Cursos</a></li>
 					<li><a href="#">Encargos</a></li>
-					<li><a href="#">Redes Sociales</a></li>
+					<li><a href="redessociales.php">Redes Sociales</a></li>
 				</ul>
 
 				<form class="search-form">

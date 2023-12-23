@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-<meta charset="UTF-8">
-<title>Ericiosa - Detalles</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/productstyle.css">
-</head>
-
-<body>
-<header>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>Ericiosa - Redes Sociales</title>
+		<link rel="stylesheet" href="../public/css/redesstyle.css" />
+	</head>
+	<body>
+    <header>
 			<div class="container-hero">
 				<div class="container hero">
 					<div class="customer-support">
@@ -46,7 +45,7 @@
 						<li><a href="catalogo.php">Catalogo</a></li>
 						<li><a href="cursos.php">Cursos</a></li>
 						<li><a href="#">Encargos</a></li>	
-						<li><a href="redessociales">Redes Sociales</a></li>
+						<li><a href="#">Redes Sociales</a></li>
 					</ul>
 
 					<form class="search-form">
@@ -59,75 +58,47 @@
 			</div>
 		</header>
 
-      
 
-<section>
+<main class="main-content">
 
-<main class="main-content" >
-	
-		<div class="container-product">
-  <div class="box">
-  <div class="images">
-  <div class="img-holder active" onclick="changeImage('css/images/producto1.jpg')">
-    <img id="mainImage" src="css/images/producto1.jpg">
-  </div>
-  <div class="img-holder" onclick="changeImage('css/images/producto1.jpg')">
-    <img src="css/images/producto1.jpg">
-  </div>
-  <div class="img-holder" onclick="changeImage('css/images/producto2.jpg')">
-    <img src="css/images/producto2.jpg">
-  </div>
-  <div class="img-holder" onclick="changeImage('css/images/producto3.jpg')">
-    <img src="css/images/producto3.jpg">
-  </div>
-</div>
-	  <div class="basic-info">
-		  <h1>Nombre de producto</h1>
-		  <span class="actions" > <i class="fa-solid fa-heart" ></i> <i class="fa-solid fa-code-compare"></i> </span>
-
-	
-		  <span>$0.00</span>
-		  <div class="options">
-			  <a href="#" >Comprar Ahora</a>
-			  <a href="#">Añadir Al carrito</a>
-		  </div>
-	  </div>
-	  <div class="description">
-		  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus temporibus corporis repudiandae, consectetur nostrum nisi commodi placeat rerum molestias numquam nihil accusantium deleniti! Enim, nesciunt a quis amet hic officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae nemo accusantium tempora facere doloremque cum iusto, ut neque, fuga omnis libero laborum ullam. At dolorum qui atque labore illo dignissimos.</p>
-		  
-		 <span><h2>Ver Producto en:</h2></span>
-		  <div class="social-icons">
-							  <span class="facebook">
-							  <a href=""><i class="fa-brands fa-facebook-f"></i></a>
-							</span>
-
-							<span class="youtube">
-
-							<a href=""><i class="fa-brands fa-youtube"></i></a>
-				
-							</span>
-							<span class="pinterest">
-							<a href=""><i class="fa-brands fa-pinterest-p"></i></a>
-								
-							</span>
-							<span class="instagram">
-								<a href=""><i class="fa-brands fa-instagram"></i></a>
-				
-							</span>
-						</div>
+<section class="container top-categories">
+				<h1 class="heading-1">Redes Sociales</h1>		
+				<div class="container-categories">
+					<div class="card-category category-instagram">
+						<p>Instagram</p>
+						<a href="https://www.instagram.com/ericiosa/?hl=es" class="ws"><span>Seguir</span></a>  
 					</div>
-	  </div>
-  </div>
-</div>
+					<div class="card-category category-youtube">
+						<p>Youtube</p>
+						<a href="https://www.youtube.com/@ericiosa" class="ws"><span>Suscribirse</span></a>  
+					</div>
+					<div class="card-category category-x">
+						<p>X</p>
+						<a href="https://twitter.com/ericiosa?lang=es" class="ws"><span>Seguir</span></a>  
+					</div>
+					<div class="card-category category-pinterest">
+						<p>Pinterest</p>
+						<a href="https://www.pinterest.com/ericiosa/" class="ws"><span>Seguir</span></a>  
+					</div>
+            
+				</div>
+			</section>
+
+			<br>
+</main>
 
 
-	 </main>
 
 
-</section>
-		
 
-		<footer class="footer">
+
+
+
+
+
+
+
+        <footer class="footer">
 			<div class="container container-footer">
 				<div class="menu-footer">
 					<div class="contact-info">
@@ -203,21 +174,12 @@
 			</div>
 		</footer>
 
-
-
-		<script>
-  function changeImage(newSrc) {
-    var mainImage = document.getElementById('mainImage');
-    mainImage.src = newSrc;
-  }
-</script>
 		<script
 		
 			src="https://kit.fontawesome.com/81581fb069.js"
 			crossorigin="anonymous"
 		></script>
 		<script src="simpleParallax.js"></script>
-
-</body>
-
+        
+	</body>
 </html>

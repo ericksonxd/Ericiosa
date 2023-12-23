@@ -43,7 +43,7 @@ session_start();
 include '../config/conexion.php';
 
 if (isset($_SESSION['usuario'])) {
-    header("Location: catalogo.php");
+    header("Location: index.php");
 }
 
 if (isset($_POST['login'])) {
