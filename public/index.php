@@ -44,7 +44,7 @@
 						<li><a href="index.php">Inicio</a></li>
 						<li><a href="catalogo.php">Catalogo</a></li>
 						<li><a href="cursos.php">Cursos</a></li>
-						<li><a href="#">Encargos</a></li>	
+						<li><a href="custom.php">Encargos</a></li>	
 						<li><a href="redessociales.php">Redes Sociales</a></li>
 					</ul>
 
@@ -61,7 +61,7 @@
 		<section class="banner">
 			<div class="content-banner">
 				<p>Magia en papel</p>
-				<h2>Clases Online y Tutoriales	<br />Papelería Creativa para cumpleaños y eventoso</h2>
+				<h2>Clases Online y Tutoriales	<br />Papelería Creativa para cumpleaños y eventos</h2>
 				<a href="catalogo.php">explora el catálogo</a>
 			</div>
 		</section>
@@ -71,7 +71,7 @@
 				<div class="card-feature">
 				<i class="fa-solid fa-globe"></i>
 					<div class="feature-content">
-				<a href="" class="ws" >	<span>Encargos a nivel Nacional</span></a>	
+				<a href="custom.php" class="ws" >	<span>Encargos a nivel Nacional</span></a>	
 					
 						<p> Realiza tu pedido ya</p>
 					</div>
@@ -106,7 +106,7 @@
 				<div class="container-categories">
 					<div class="card-category category-encargos">
 						<p>Encargos</p>
-						<a href="" class="ws"><span>Ver más</span></a>  
+						<a href="custom.php" class="ws"><span>Ver más</span></a>  
 					</div>
 					<div class="card-category category-productos">
 						<p>Productos</p>

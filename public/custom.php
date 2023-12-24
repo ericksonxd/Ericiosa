@@ -1,17 +1,14 @@
-
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <title>Ericiosa - Catalogo</title>
-    <link rel="stylesheet" href="css/catalogostyle.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-</head>
-<body>
-<header>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>Ericiosa - Custom Order</title>
+		<link rel="stylesheet" href="../public/css/customstyle.css" />
+	</head>
+	<body>
+		<header>
 			<div class="container-hero">
 				<div class="container hero">
 					<div class="customer-support">
@@ -47,9 +44,8 @@
 						<li><a href="index.php">Inicio</a></li>
 						<li><a href="catalogo.php">Catalogo</a></li>
 						<li><a href="cursos.php">Cursos</a></li>
-                        <li><a href="custom.php">Encargos</a></li>
+						<li><a href="#">Encargos</a></li>	
 						<li><a href="redessociales.php">Redes Sociales</a></li>
-
 					</ul>
 
 					<form class="search-form">
@@ -61,58 +57,62 @@
 				</nav>
 			</div>
 		</header>
-<section>
-<main  class="main-content" >
+
+<main class="main-content" >  
+
+<div class="container-product">
+
+<div class="box">
+<h1>Encargo Personalizado</h1>
+<br>
+<h2>Por favor usa el siguiente formulario para enviar tu orden. Te contactaremos en el menor tiempo posible via texto o e-mail para discutir los detalles y el precio. </h2>
+<br>
 
 
-<h1 class="heading-1" >Catalogo de productos</h1>
+<div class="custom-order-form"  >
+<form action="order.php" method="POST"  >
+<div class="form-body">
+<i class="fa-regular fa-user"></i>
+<input type="text" placeholder="Nombre Completo">
+<i class="fa-regular fa-envelope"></i>
+<input type="email" placeholder="Ingresa tu correo electrónico">
+<i class="fa-regular fa-calendar-days"></i><span>Fecha del evento</span>
+<input type="date">
+<i class="fa-brands fa-whatsapp"></i>
+<input type="number" placeholder="Ingresa tu número de contacto">
+<i class="fa-solid fa-location-dot"></i>
+<input type="text" placeholder="ingresa tu Dirección">  
+<i class="fa-solid fa-circle-info"></i>
+<span>Detalles de la orden</span>
+<br>
+ <textarea id="description" cols="30" rows="10" minlength="20"  maxlength="569" required  placeholder="Ingresa una breve descripcion del producto..." ></textarea>
 
-<div class="catalogo-content">
+<br>
+<input type="submit" class="send" value="Enviar Orden">
 
-
-
-<div class="card-product">
-						
-						<div class="container-img">
-						<a href="product.php" class="ws" ><img class="card-img" src="../public/css/images/producto1.jpg" alt="" /></a>	
-							<span class="discount">-0%</span>
-							<div class="button-group">
-								<span>
-									<i class="fa-regular fa-eye"></i>
-								</span>
-								<span>
-									<i class="fa-regular fa-heart"></i>
-								</span>
-								<span>
-									<i class="fa-solid fa-code-compare"></i>
-								</span>
-							</div>
-						</div>
-						<div class="content-card-product">
-							<div class="separe">
-	
-							</div>
-		                    <a href="product.php" class="product-link" > Primera Comunion</a>
-							<span class="add-cart">
-								<i class="fa-solid fa-basket-shopping"></i>
-							</span>
-							<p class="price">$0.00 <span>$0.00</span></p>
-						</div>
-					</div>
-                   
-                    
-      </div>
+</div>
 
 
 
+</form>
+</div>
 
-</main>
+
+
+</div>
+
+
+
+</div>
+
+
+	 </main>
+
+
 </section>
+		
 
-
-
-
-        <footer class="footer">
+		<footer class="footer">
 			<div class="container container-footer">
 				<div class="menu-footer">
 					<div class="contact-info">
@@ -186,7 +186,10 @@
 
 				</div>
 			</div>
-		</footer>
+
+
+</main>
+        
 
 
 		<script
@@ -194,5 +197,7 @@
 			src="https://kit.fontawesome.com/81581fb069.js"
 			crossorigin="anonymous"
 		></script>
-</body>
+		<script src="simpleParallax.js"></script>
+
+	</body>
 </html>
