@@ -469,6 +469,14 @@ transition:0.3s ;
 	font-size: 1.2rem;
 }
 
+.logout-button{
+	font-size: 2rem;
+	color: var(--dark-color);
+
+
+
+}
+
 .card-product:hover .discount {
 	background-color: #000;
 }

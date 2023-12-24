@@ -57,7 +57,7 @@ if (isset($_POST['login'])) {
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row['password'])) {
             $_SESSION['usuario'] = $row['nombre'];
-            header("Location: catalogo.php");
+            header("Location: index.php");
         } else {
             echo '<script>alert("Contraseña incorrecta")</script>';
         }

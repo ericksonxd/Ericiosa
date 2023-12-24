@@ -663,6 +663,11 @@ a.product-link {
     grid-gap: 35px;
 }
 
+.logout-button{
+	font-size: 2rem;
+	color: var(--dark-color);
+}
+
 .box .images {
 	grid-area: images;
     display: grid;

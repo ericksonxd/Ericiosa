@@ -1,15 +1,18 @@
+<?php
+session_start();
+?>	
+
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-<meta charset="UTF-8">
-<title>Ericiosa - Detalles</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/productstyle.css">
-</head>
-
-<body>
-<header>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>Ericiosa - Home</title>
+		<link rel="stylesheet" href="../public/css/productstyle.css" />
+	</head>
+	<body>
+		<header>
 			<div class="container-hero">
 				<div class="container hero">
 					<div class="customer-support">
@@ -26,15 +29,26 @@
 					</div>
 
 					<div class="container-user">
-
-					<a href="login.php">	<i class="fa-solid fa-user"></i></a>
+					<?php
+                    // Verifica si hay una sesión iniciada
+                    if (isset($_SESSION["usuario"])) {
+                        // Si el usuario está conectado, muestra el nombre, enlace al perfil y enlace de logout
+                        echo '<span class="username">' . $_SESSION["usuario"] . '</span>';
+                        echo '<a href="perfil.php"><i class="fa-solid fa-user"></i></a>';
+                        echo '<a href="../config/logout.php" class="logout-button" ><i class="fa-solid fa-right-from-bracket"></i></a>';
+                    } else {
+                        // Si el usuario no está conectado, muestra el enlace de inicio de sesión
+                        echo '<a href="login.php"><i class="fa-solid fa-user"></i></a>';
+                    }
+                    ?>
 				
-						<i class="fa-solid fa-basket-shopping"></i>
-						<div class="content-shopping-cart">
-							<span class="text">Carrito</span>
-							<span class="number">(0)</span>
-						</div>
-					</div>
+    <i class="fa-solid fa-basket-shopping"></i>
+    <div class="content-shopping-cart">
+        <span class="text">Carrito</span>
+        <span class="number">(0)</span>
+    </div>
+</div>
+
 				</div>
 			</div>
 
@@ -46,7 +60,7 @@
 						<li><a href="catalogo.php">Catalogo</a></li>
 						<li><a href="cursos.php">Cursos</a></li>
 						<li><a href="custom.php">Encargos</a></li>	
-						<li><a href="redessociales">Redes Sociales</a></li>
+						<li><a href="redessociales.php">Redes Sociales</a></li>
 					</ul>
 
 					<form class="search-form">

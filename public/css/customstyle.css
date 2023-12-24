@@ -1058,6 +1058,9 @@ color: black;
 	font-size: 16px;
 }
 
+.logout-button{
+	font-size: 2rem;
+	color: var(--dark-color);}
 
 .box h2{
 font-size: 1.7rem;

@@ -1,3 +1,8 @@
+
+
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -25,8 +30,18 @@
 					</div>
 
 					<div class="container-user">
-
-					<a href="login.php">	<i class="fa-solid fa-user"></i></a>
+					<?php
+                    // Verifica si hay una sesión iniciada
+                    if (isset($_SESSION["usuario"])) {
+                        // Si el usuario está conectado, muestra el nombre, enlace al perfil y enlace de logout
+                        echo '<span class="username">' . $_SESSION["usuario"] . '</span>';
+                        echo '<a href="perfil.php"><i class="fa-solid fa-user"></i></a>';
+                        echo '<a href="../config/logout.php" class="logout-button" ><i class="fa-solid fa-right-from-bracket"></i></a>';
+                    } else {
+                        // Si el usuario no está conectado, muestra el enlace de inicio de sesión
+                        echo '<a href="login.php"><i class="fa-solid fa-user"></i></a>';
+                    }
+                    ?>
 				
 						<i class="fa-solid fa-basket-shopping"></i>
 						<div class="content-shopping-cart">

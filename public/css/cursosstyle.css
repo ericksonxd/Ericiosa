@@ -408,6 +408,13 @@ transition:0.3s ;
  color: #d9a0ff;
 }
 
+.logout-button{
+	font-size: 2rem;
+	color: var(--dark-color);
+
+
+}
+
 .card-category p::after {
 	content: '';
 	width: 2.5rem;
