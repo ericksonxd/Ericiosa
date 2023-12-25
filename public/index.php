@@ -32,6 +32,7 @@ session_start();
 					<div class="container-user">
 					<?php
                     // Verifica si hay una sesión iniciada
+					// hola papu
                     if (isset($_SESSION["usuario"])) {
                         // Si el usuario está conectado, muestra el nombre, enlace al perfil y enlace de logout
                         echo '<span class="username">' . $_SESSION["usuario"] . '</span>';
