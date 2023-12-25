@@ -1,5 +1,11 @@
 <?php
 session_start();
+include '../config/conexion.php';
+
+// Consultar los productos desde la base de datos
+$query = "SELECT id_product, nombre, precio, imagen1 FROM products";
+$resultado = mysqli_query($conn, $query);
+
 ?>
 
 <!DOCTYPE html>
@@ -72,50 +78,42 @@ session_start();
    </nav>
 </div>
 		</header>
-<section>
-<main  class="main-content" >
+		<section>
+    <main class="main-content">
+        <h1 class="heading-1">Catálogo de productos</h1>
 
+        <div class="catalogo-content">
+            <!-- Iterar sobre los resultados de la consulta y mostrar la información de cada producto -->
+            <?php while ($fila = mysqli_fetch_assoc($resultado)) : ?>
+                <div class="card-product">
+                    <div class="container-img">
+                        <!-- Enlace a la página de producto con el ID del producto -->
+                        <a href="product.php?id=<?php echo $fila['id_product']; ?>" class="ws">
+                            <img class="card-img" src="../private/images_product/<?php echo $fila['imagen1']; ?>" alt="" />
+                        </a>
+                        <div class="button-group">
+                            <span>
+                                <i class="fa-regular fa-heart"></i>
+                            </span>
+                            <span>
+                                <i class="fa-solid fa-code-compare"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="content-card-product">
+                        <div class="separe"></div>
+                        <!-- Enlace a la página de producto con el ID del producto -->
+                        <a href="product.php?id=<?php echo $fila['id_product']; ?>" class="product-link"><?php echo $fila['nombre']; ?></a>
+                        <span class="add-cart">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </span>
+                        <p class="price">$<?php echo $fila['precio']; ?></p>
+                    </div>
+                </div>
+            <?php endwhile; ?>
 
-<h1 class="heading-1" >Catalogo de productos</h1>
-
-<div class="catalogo-content">
-
-
-
-<div class="card-product">
-						
-						<div class="container-img">
-						<a href="product.php" class="ws" ><img class="card-img" src="../public/css/images/producto1.jpg" alt="" /></a>	
-							<span class="discount">-0%</span>
-							<div class="button-group">
-				
-								<span>
-									<i class="fa-regular fa-heart"></i>
-								</span>
-								<span>
-									<i class="fa-solid fa-code-compare"></i>
-								</span>
-							</div>
-						</div>
-						<div class="content-card-product">
-							<div class="separe">
-	
-							</div>
-		                    <a href="product.php" class="product-link" > Primera Comunion</a>
-							<span class="add-cart">
-								<i class="fa-solid fa-basket-shopping"></i>
-							</span>
-							<p class="price">$0.00 <span>$0.00</span></p>
-						</div>
-					</div>
-                   
-                    
-      </div>
-
-
-
-
-</main>
+        </div>
+    </main>
 </section>
 
 
@@ -135,7 +133,7 @@ session_start();
 						</ul>
 						<div class="social-icons">
 							  <span class="facebook">
-							  <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+							  <a href=""><i class="fa-brands fa-x-twitter"></i></a>
 							</span>
 
 							<span class="youtube">
@@ -207,3 +205,7 @@ session_start();
 		<script src="../config/navbar.js" ></script>
 </body>
 </html>
+<?php
+// Cerrar la conexión a la base de datos
+mysqli_close($conn);
+?>

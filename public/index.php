@@ -145,7 +145,6 @@ session_start();
 						
 						<div class="container-img">
 						<a href="" class="ws" ><img class="card-img" src="../public/css/images/producto1.jpg" alt="" /></a>	
-							<span class="discount">-0%</span>
 							<div class="button-group">
 			
 								<span>
@@ -164,7 +163,7 @@ session_start();
 							<span class="add-cart">
 								<i class="fa-solid fa-basket-shopping"></i>
 							</span>
-							<p class="price">$0.00 <span>$0.00</span></p>
+							<p class="price">$0.00</p>
 						</div>
 					</div>
 					<!-- Producto 2 -->
@@ -173,7 +172,6 @@ session_start();
 
 						<a href="" class="ws" ><img class="card-img" src="../public/css/images/producto2.jpg" alt="" /></a>
 							
-							<span class="discount">-0%</span>
 							<div class="button-group">
 						
 								<span>
@@ -191,15 +189,14 @@ session_start();
 							<span class="add-cart">
 								<i class="fa-solid fa-basket-shopping"></i>
 							</span>
-							<p class="price">$0.00 <span>$0.00</span></p>
+							<p class="price">$0.00</p>
 						</div>
 					</div>
 					<!--  -->
 					<div class="card-product">
 						<div class="container-img">
 							<a href="" class="ws" >	<img class="card-img" src="../public/css/images/producto3.jpg" alt="" /></a>
-						
-							<span class="discount">-0%</span>
+					
 							<div class="button-group">
 		
 								<span>
@@ -217,7 +214,7 @@ session_start();
 							<span class="add-cart">
 								<i class="fa-solid fa-basket-shopping"></i>
 							</span>
-							<p class="price">$0.00 <span>$0.00</span></p>
+							<p class="price">$0.00 </p>
 						</div>
 					</div>
 					<!--  -->
@@ -226,7 +223,7 @@ session_start();
 
 						<a href="" class="ws" ><img class="card-img" src="../public/css/images/producto4.jpg" alt="" /></a>
 					
-							<span class="discount">-0%</span>
+
 							<div class="button-group">
 					
 								<span>
@@ -244,7 +241,7 @@ session_start();
 							<span class="add-cart">
 								<i class="fa-solid fa-basket-shopping"></i>
 							</span>
-							<p class="price">$0.00 <span>$0.00</span></p>
+							<p class="price">$0.00</p>
 						</div>
 					</div>
 			</section>
@@ -290,7 +287,7 @@ session_start();
 						</ul>
 						<div class="social-icons">
 							  <span class="facebook">
-							  <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+							  <a href=""><i class="fa-brands fa-x-twitter"></i></a>
 							</span>
 
 							<span class="youtube">

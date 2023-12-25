@@ -31,97 +31,68 @@ mysqli_close($conn);
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard - Ericiosa</title>
-    <link rel="icon" href="./img/logo.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Dashboard Ericiosa</title>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+ <link rel="stylesheet" href="../public/css/adminstyle.css">
 </head>
 
 <body>
 
-<nav class="navbar bg-primary" data-bs-theme="dark">
-    <div class="container-fluid">
-        <a href="dashboard.php" class="navbar-brand">GaleryU</a>
-        <form class="d-flex">
-            <h1 class="navbar-brand" href="#">Bienvenid@ Administrador(@): <?php echo $admin_nombre; ?></h1>  <a class="btn btn-danger" href="../config/logout.php">Cerrar sesión</a>
-        </form>
-    </div>
-</nav>
+    <body className='snippet-body'>
 
-    <div class="container">
+        <body id="body-pd">
+            <header class="header" id="header">
+                <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i></div>
 
-        <br>
+                <div class="header_img">
 
-        <center>
-            <h1> Añadir un producto</h1>
-        </center>
-        <br>
-        <div class="container">
-
-            <a class="btn btn-dark" href="./agregarimg.php "> Añadir producto</a>
-            <hr>
-
-            <div class="container">
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">imagen</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <?php
-                        include "../config/conexion.php";
-
-                        $sql = " SELECT * FROM imagenes ";
-                        $resultado = $conexion->query($sql);
-
-                        while ($fila = $resultado->fetch_assoc()) { ?>
-
-                            <tr>
-                            </tr>
-                            <tr>
-                                <th scope="row"><?php echo $fila['ID']?></th>
-                                <td> <?php echo $fila['nombre']?> </td>
-                                <td><?php echo $fila['descripcion']?> </td>
-                                <td><img style="width: 300px;"   src="data:image/jpg;base64,<?php echo base64_encode($fila['imagen'])?>" alt=""></td>
-                                <td> 
-                                    <a href="vista_editar.php?ID=<?php echo $fila['ID']?>" class="btn btn-warning">editar</a>
-                                    <a href="eliminarimagen.php?ID=<?php echo $fila['ID']?>" class="btn btn-danger">Eliminar </a>
-                            
-                            
-                            </td>
-                            </tr>
-                            <tr>
-                 
-                        
-                    </tbody>
-
-                <?php  } ?>
-                </table>
+                    <h6> Bienvenid@ Administrador@:
+                        <?php echo $admin_nombre; ?>
+                    </h6>
+                </div>
+            </header>
+            <div class="l-navbar" id="nav-bar">
+                <nav class="nav">
+                    <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
+                                class="nav_logo-name">Ericiosa - Admin</span> </a>
+                        <div class="nav_list"> <a href="#" class="nav_link active"> <i
+                                    class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> <a
+                                href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
+                                    class="nav_name">Usuarios</span> </a> <a href="adminproduct.php" class="nav_link"> <i
+                                    class='bx bx-folder nav_icon'></i> <span class="nav_name">Productos</span> </a> <a
+                                href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
+                                    class="nav_name">Stats</span> </a>
+                        </div>
+                    </div> <a href="../config/logout.php" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
+                            class="nav_name">Cerrar Sesion</span> </a>
+                </nav>
             </div>
-
-        </div>
-
-
-
+            <!--Container Main start-->
+            <div class="height-100 bg-light">
+                <h4>Main Components</h4>
 
 
-    </div>
+           
 
 
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-</body>
-
-</html>
-</html>
+            </div>
+            <!--Container Main end-->
+            <script type='text/javascript'
+                src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
+            <script type='text/javascript' src='#'></script>
+            <script type='text/javascript' src='#'></script>
+            <script type='text/javascript' src='#'></script>
+            <script type='text/javascript'></script>
+            </script>
+            <script src="../config/sidebar.js"></script>
+            <script type='text/javascript'>var myLink = document.querySelector('a[href="#"]');
+                myLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                });
+                            
+                                </body >
+                            </html >

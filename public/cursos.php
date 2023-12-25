@@ -214,7 +214,7 @@ session_start();
 					</ul>
 					<div class="social-icons">
 						<span class="facebook">
-							<a href=""><i class="fa-brands fa-facebook-f"></i></a>
+							<a href=""><i class="fa-brands fa-x-twitter"></i></a>
 						</span>
 
 						<span class="youtube">
