@@ -52,25 +52,28 @@ session_start();
 				</div>
 			</div>
 
+			
 			<div class="container-navbar">
-				<nav class="navbar container">
-					<i class="fa-solid fa-bars"></i>
-					<ul class="menu">
-						<li><a href="index.php">Inicio</a></li>
-						<li><a href="catalogo.php">Catalogo</a></li>
-						<li><a href="cursos.php">Cursos</a></li>
-						<li><a href="custom.php">Encargos</a></li>	
-						<li><a href="redessociales.php">Redes Sociales</a></li>
-					</ul>
+   <nav class="navbar container">
+      <i class="fa-solid fa-bars" id="mobile-menu-btn"></i>
+      <ul class="menu-mobile">
+         <li><a href="index.php">Inicio</a></li>
+         <li><a href="catalogo.php">Catalogo</a></li>
+         <li><a href="cursos.php">Cursos</a></li>
+         <li><a href="custom.php">Encargos</a></li>
+         <li><a href="redessociales.php">Redes Sociales</a></li>
+      </ul>
+      <ul class="menu">
+         <li><a href="index.php">Inicio</a></li>
+         <li><a href="catalogo.php">Catalogo</a></li>
+         <li><a href="cursos.php">Cursos</a></li>
+         <li><a href="custom.php">Encargos</a></li>
+         <li><a href="redessociales.php">Redes Sociales</a></li>
+      </ul>
+   </nav>
+</div>
 
-					<form class="search-form">
-						<input type="search" placeholder="Buscar..." />
-						<button class="btn-search">
-							<i class="fa-solid fa-magnifying-glass"></i>
-						</button>
-					</form>
-				</nav>
-			</div>
+			
 		</header>
 
 		<section class="banner">
@@ -144,9 +147,7 @@ session_start();
 						<a href="" class="ws" ><img class="card-img" src="../public/css/images/producto1.jpg" alt="" /></a>	
 							<span class="discount">-0%</span>
 							<div class="button-group">
-								<span>
-									<i class="fa-regular fa-eye"></i>
-								</span>
+			
 								<span>
 									<i class="fa-regular fa-heart"></i>
 								</span>
@@ -174,9 +175,7 @@ session_start();
 							
 							<span class="discount">-0%</span>
 							<div class="button-group">
-								<span>
-									<i class="fa-regular fa-eye"></i>
-								</span>
+						
 								<span>
 									<i class="fa-regular fa-heart"></i>
 								</span>
@@ -202,9 +201,7 @@ session_start();
 						
 							<span class="discount">-0%</span>
 							<div class="button-group">
-								<span>
-									<i class="fa-regular fa-eye"></i>
-								</span>
+		
 								<span>
 									<i class="fa-regular fa-heart"></i>
 								</span>
@@ -231,9 +228,7 @@ session_start();
 					
 							<span class="discount">-0%</span>
 							<div class="button-group">
-								<span>
-									<i class="fa-regular fa-eye"></i>
-								</span>
+					
 								<span>
 									<i class="fa-regular fa-heart"></i>
 								</span>
@@ -362,7 +357,8 @@ session_start();
 			src="https://kit.fontawesome.com/81581fb069.js"
 			crossorigin="anonymous"
 		></script>
-		<script src="simpleParallax.js"></script>
+
+		<script src="../config/navbar.js" ></script>
 
 	</body>
 </html>

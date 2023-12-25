@@ -51,24 +51,24 @@ session_start();
 			</div>
 
 			<div class="container-navbar">
-				<nav class="navbar container">
-					<i class="fa-solid fa-bars"></i>
-					<ul class="menu">
-						<li><a href="index.php">Inicio</a></li>
-						<li><a href="catalogo.php">Catalogo</a></li>
-						<li><a href="cursos.php">Cursos</a></li>
-						<li><a href="custom.php">Encargos</a></li>	
-						<li><a href="redessociales.php">Redes Sociales</a></li>
-					</ul>
-
-					<form class="search-form">
-						<input type="search" placeholder="Buscar..." />
-						<button class="btn-search">
-							<i class="fa-solid fa-magnifying-glass"></i>
-						</button>
-					</form>
-				</nav>
-			</div>
+   <nav class="navbar container">
+      <i class="fa-solid fa-bars" id="mobile-menu-btn"></i>
+      <ul class="menu-mobile">
+         <li><a href="index.php">Inicio</a></li>
+         <li><a href="catalogo.php">Catalogo</a></li>
+         <li><a href="cursos.php">Cursos</a></li>
+         <li><a href="custom.php">Encargos</a></li>
+         <li><a href="redessociales.php">Redes Sociales</a></li>
+      </ul>
+      <ul class="menu">
+         <li><a href="index.php">Inicio</a></li>
+         <li><a href="catalogo.php">Catalogo</a></li>
+         <li><a href="cursos.php">Cursos</a></li>
+         <li><a href="custom.php">Encargos</a></li>
+         <li><a href="redessociales.php">Redes Sociales</a></li>
+      </ul>
+   </nav>
+</div>
 		</header>
 
 
@@ -192,7 +192,7 @@ session_start();
 			src="https://kit.fontawesome.com/81581fb069.js"
 			crossorigin="anonymous"
 		></script>
-		<script src="simpleParallax.js"></script>
+		<script src="../config/navbar.js" ></script>
         
 	</body>
 </html>
