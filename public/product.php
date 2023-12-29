@@ -33,6 +33,8 @@ if (isset($_GET['id'])) {
 } else {
 	// Manejo si no se proporciona un ID de producto
 	echo "ID de producto no proporcionado.";
+	header("Location: catalogo.php");
+
 	exit;
 }
 
@@ -137,14 +139,15 @@ if (isset($_GET['id'])) {
 						</div>
 					</div>
 					<div class="basic-info">
-						<h1>
-							<?php echo $nombre_producto; ?>
-						</h1>
-						<span class="actions">
-							<i class="fa-solid fa-heart"></i>
-							<i class="fa-solid fa-code-compare"></i>
-						</span>
-						<span>$
+    <h1>
+        <?php echo $nombre_producto; ?>
+    </h1>
+    <span class="actions">
+        <!-- Agregar la clase "like-button" y el atributo data-post-id al contenedor span -->
+		<span class="like-button" data-post-id="<?php echo $fila['id_product']; ?>">
+    <i class="fa-regular fa-heart"></i>
+</span>
+			<span>$
 							<?php echo $precio_producto; ?>
 						</span>
 						<div class="options">

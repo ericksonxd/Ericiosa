@@ -1037,13 +1037,24 @@ color: black;
 }
 
 
-.catalogo-content{
-	display: grid;
-	grid-template-rows: repeat(auto-fit, minmax(20rem, 1fr));
-	grid-template-areas: "a a a a a"
-						"b b b b b"
+.catalogo-content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-template-areas: "a a a a a";
 }
 
+@media (max-width: 768px) {
+    .catalogo-content {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+            "a a"
+            "b b"
+            "c c"
+            "d d"
+            "e e";
+    }
+}
 .catalogo-content {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(30rem, min-content));
@@ -1066,6 +1077,26 @@ color: black;
 		color: var(--primary-color);
 	
   }
+
+  .custom-button {
+    /* Estilos anteriores que mantenías */
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.custom-button.liked {
+    color: red;
+}
+
+  .like-button {
+    cursor: pointer;
+}
+
+.like-button.liked {
+    color: red; /* Cambia el color del like cuando está activo */
+}
+
 
   @media (min-width: 769px) {
 	.menu {

@@ -139,113 +139,45 @@ session_start();
 			</section>
 
 			<section class="container top-products">
-				<h1 class="heading-1">Productos Destacados</h1>
-				<div class="container-products">
-					<!-- Producto 1 -->
-					<div class="card-product">
-						
-						<div class="container-img">
-						<a href="" class="ws" ><img class="card-img" src="../public/css/images/producto1.jpg" alt="" /></a>	
-							<div class="button-group">
-			
-								<span>
-									<i class="fa-regular fa-heart"></i>
-								</span>
-								<span>
-									<i class="fa-solid fa-code-compare"></i>
-								</span>
-							</div>
-						</div>
-						<div class="content-card-product">
-							<div class="separe">
-	
-							</div>
-		                    <a href="" class="product-link" > Primera Comunion</a>
-							<span class="add-cart">
-								<i class="fa-solid fa-basket-shopping"></i>
-							</span>
-							<p class="price">$0.00</p>
-						</div>
-					</div>
-					<!-- Producto 2 -->
-					<div class="card-product">
-						<div class="container-img">
+    <h1 class="heading-1">Productos Destacados</h1>
+    <div class="container-products">
+        <?php
+        include '../config/conexion.php';
 
-						<a href="" class="ws" ><img class="card-img" src="../public/css/images/producto2.jpg" alt="" /></a>
-							
-							<div class="button-group">
-						
-								<span>
-									<i class="fa-regular fa-heart"></i>
-								</span>
-								<span>
-									<i class="fa-solid fa-code-compare"></i>
-								</span>
-							</div>
-						</div>
-						<div class="content-card-product">
-							<div class="separe">
-							</div>
-							<a href="" class="product-link">Cajitas Princess</a>
-							<span class="add-cart">
-								<i class="fa-solid fa-basket-shopping"></i>
-							</span>
-							<p class="price">$0.00</p>
-						</div>
-					</div>
-					<!--  -->
-					<div class="card-product">
-						<div class="container-img">
-							<a href="" class="ws" >	<img class="card-img" src="../public/css/images/producto3.jpg" alt="" /></a>
-					
-							<div class="button-group">
-		
-								<span>
-									<i class="fa-regular fa-heart"></i>
-								</span>
-								<span>
-									<i class="fa-solid fa-code-compare"></i>
-								</span>
-							</div>
-						</div>
-						<div class="content-card-product">
-							<div class="separe">
-							</div>
-				            <a href="" class="product-link">Cajita Cat in The Hat</a>
-							<span class="add-cart">
-								<i class="fa-solid fa-basket-shopping"></i>
-							</span>
-							<p class="price">$0.00 </p>
-						</div>
-					</div>
-					<!--  -->
-					<div class="card-product">
-						<div class="container-img">
+        $queryDestacados = "SELECT id_product, nombre, precio, imagen1 FROM products WHERE destacado = 1 LIMIT 4";
+        $resultadoDestacados = mysqli_query($conn, $queryDestacados);
 
-						<a href="" class="ws" ><img class="card-img" src="../public/css/images/producto4.jpg" alt="" /></a>
-					
+        while ($filaDestacado = mysqli_fetch_assoc($resultadoDestacados)) {
+            echo '<div class="card-product">';
+            echo '<div class="container-img">';
+            echo '<a href="product.php?id=' . $filaDestacado['id_product'] . '" class="ws">';
+            echo '<img class="card-img" src="../private/images_product/' . $filaDestacado['imagen1'] . '" alt="" />';
+            echo '</a>';
+            echo '<div class="button-group">';
+            echo '<span>';
+            echo '<i class="fa-regular fa-heart"></i>'; /* aca esta donde aparecen los likes */
+            echo '</span>';
+            echo '<span>';
+            echo '<i class="fa-solid fa-code-compare"></i>';
+            echo '</span>';
+            echo '</div>';
+            echo '</div>';
+            echo '<div class="content-card-product">';
+            echo '<div class="separe"></div>';
+            echo '<a href="product.php?id=' . $filaDestacado['id_product'] . '" class="product-link">' . $filaDestacado['nombre'] . '</a>';
+            echo '<span class="add-cart">';
+            echo '<i class="fa-solid fa-basket-shopping"></i>';
+            echo '</span>';
+            echo '<p class="price">$' . $filaDestacado['precio'] . '</p>';
+            echo '</div>';
+            echo '</div>';
+        }
 
-							<div class="button-group">
-					
-								<span>
-									<i class="fa-regular fa-heart"></i>
-								</span>
-								<span>
-									<i class="fa-solid fa-code-compare"></i>
-								</span>
-							</div>
-						</div>
-						<div class="content-card-product">
-							<div class="separe">
-							</div>
-							<a href="" class="product-link">Spiderman Cake Topper</a>
-							<span class="add-cart">
-								<i class="fa-solid fa-basket-shopping"></i>
-							</span>
-							<p class="price">$0.00</p>
-						</div>
-					</div>
-			</section>
+        // Cerrar la conexión a la base de datos
+        mysqli_close($conn);
+        ?>
+    </div>
+</section>>
 
 			<section class="gallery">
 				<img
@@ -357,6 +289,6 @@ session_start();
 		></script>
 
 		<script src="../config/navbar.js" ></script>
-
+        <script src="../config/likes.js"></script
 	</body>
 </html>

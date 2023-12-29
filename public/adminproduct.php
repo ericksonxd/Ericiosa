@@ -96,7 +96,7 @@ mysqli_close($conn);
                     echo '<td>' . $fila['nombre'] . '</td>';
                     echo '<td>' . $fila['descripcion'] . '</td>';
                     echo '<td>' . $fila['precio'] . '</td>';
-                    echo '<td>' . $fila['likes'] . '</td>';
+                    echo '<td>' . $fila['likes'] . '</td>';  /* aca esta donde aparecen los likes */
                     echo '<td>';
                     echo '<a href="' . $fila['link_x'] . '">Twitter</a> | ';
                     echo '<a href="' . $fila['link_pinterest'] . '">Pinterest</a> | ';
@@ -109,10 +109,13 @@ mysqli_close($conn);
                     echo '<img src="../private/images_product/' . $fila['imagen3'] . '" alt="Imagen 3" width="50">';
                     echo '</td>';
                     echo '<td>';
-                    echo '<button class="btn btn-warning">Destacar</button> | <a class="btn btn-success" href="editar_producto.php?id=' . $fila['id_product'] . '">Editar</a>| <button class="btn btn-danger" onclick="eliminarProducto(' . $fila['id_product'] . ')">Eliminar</button>';
-                    echo '</td>';
-                    echo '</tr>';
-                }
+                    if ($fila['destacado'] == 1) {
+                        echo '<button class="btn btn-info" onclick="toggleDestacado(' . $fila['id_product'] . ', false)">Quitar Destacado</button>';
+                    } else {
+                        echo '<button class="btn btn-warning" onclick="toggleDestacado(' . $fila['id_product'] . ', true)">Destacar</button>';
+                    }
+                    echo ' | <a class="btn btn-success" href="editar_producto.php?id=' . $fila['id_product'] . '">Editar</a> | <button class="btn btn-danger" onclick="eliminarProducto(' . $fila['id_product'] . ')">Eliminar</button>';
+                    echo '</td>';  }
 
                 // Cerrar la conexión a la base de datos
                 mysqli_close($conn); // Cambiado de $conexion a $conn
@@ -145,6 +148,24 @@ mysqli_close($conn);
                 xhr.send();
             }
         }
+
+        function toggleDestacado(idProducto, destacar) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    // Manejar la respuesta del servidor
+                    alert(xhr.responseText);
+                    // Recargar la página para reflejar los cambios
+                    location.reload();
+                } else {
+                    alert('Error al intentar destacar/quitar destacado el producto');
+                }
+            }
+        };
+        xhr.open('GET', '../config/toggle_destacado.php?id=' + idProducto + '&destacar=' + destacar, true);
+        xhr.send();
+    }
     </script>
 </body>
 

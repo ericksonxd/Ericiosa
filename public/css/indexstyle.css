@@ -446,16 +446,16 @@ transition:0.3s ;
 }
 
 .card-product {
-	background-color: #fff;
-	padding: 2rem 3rem;
-	border-radius: 0.5rem;
-	cursor: pointer;
-	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 2rem 3rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-.card-product:hover{
-	transition: 0.3s;
-	scale: 1.08;
+.card-product:hover {
+    transition: 0.3s;
+    scale: 1.08;
 }
 
 .container-img {

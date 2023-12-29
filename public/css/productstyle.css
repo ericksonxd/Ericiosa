@@ -323,6 +323,26 @@ transition: 0.3s;
 	background-color: #c8232c;
 }
 
+.like-button {
+    cursor: pointer;
+}
+
+.like-button.liked {
+    color: red; /* Cambia el color del like cuando está activo */
+}
+
+.custom-button {
+    /* Estilos anteriores que mantenías */
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.custom-button.liked {
+    color: red;
+}
+
+
 .instagram {
 	background: linear-gradient(
 		#405de6,

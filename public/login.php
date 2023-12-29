@@ -8,34 +8,37 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
       </head>
     <body>
-      <div class="container">
-    <div class="nav">
-    <a class="return-btn" href="index.php">Pagina Principal</a>   
-
-    <a class="login-btn" href="register.php">Registrate</a>
-    </div>
-    <hr>
-        <div class="title"> Inicia Sesión en Ericiosa</div>
+    <div class="container">
+        <div class="nav">
+            <a class="return-btn" href="index.php">Pagina Principal</a>
+            <a class="login-btn" href="register.php">Registrate</a>
+        </div>
+        <hr>
+        <div class="title">Inicia Sesión en Ericiosa</div>
         <div class="content">
-          <form action="login.php" method="POST">
-            <div class="user-details">
-              <div class="input-box">
-            
-              <div class="input-box">
-                <span class="details"><ion-icon name="mail-outline"></ion-icon> Correo electrónico</span>
-                <input type="email" name="email"  autocomplete="email" placeholder="Ingrese su correo electrónico" required>
-              </div>
-            
-              <div class="input-box">
-                <span class="details"><ion-icon name="lock-open-outline"></ion-icon>Contraseña</span>
-                <input type="password" name="password"autocomplete="current-password" placeholder="Ingrese su contraseña" required>
-              </div>
-            
-            </div>         
-            <div class="button">
-              <input type="submit" name="login" value="Inicia Sesion">
+            <form action="login.php" method="POST">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details"><ion-icon name="mail-outline"></ion-icon> Correo electrónico</span>
+                        <input type="email" name="email" id="email" autocomplete="email" placeholder="Ingrese su correo electrónico" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details"><ion-icon name="lock-open-outline"></ion-icon> Contraseña</span>
+                        <input type="password" name="password" id="password" autocomplete="current-password" placeholder="Ingrese su contraseña" required>
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" name="login" value="Inicia Sesion">
+                </div>
+            </form>
+            <div class="media-options">
+                <a href="#" class="field google">
+                    <img src="./css/images/google.png" alt="" class="google-img">
+                    <span>Ingresa con Google</span>
+                </a>
             </div>
-          </form>
+        </div>
+    </div>
     
 
           <?php
@@ -71,12 +74,7 @@
 
 
 
-          <div class="media-options">
-            <a href="#" class="field google">
-                <img src="./css/images/google.png" alt="" class="google-img">
-                <span>Ingresa con Google</span>
-            </a>
-        </div>
+     
           </div>
       </div>
 
