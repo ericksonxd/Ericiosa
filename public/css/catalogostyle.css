@@ -493,6 +493,14 @@ transition:0.3s ;
 	transition: all 0.4s ease;
 }
 
+
+.like-button i {
+    color: black; /* o el color predeterminado del ícono */
+}
+
+.like-button.liked i {
+    color: red; /* Cambia el color según tu preferencia */
+}
 .button-group span {
 	border: 1px solid var(--dark-color);
 	padding: 0.8rem;
@@ -517,16 +525,6 @@ transition:0.3s ;
 .button-group span:hover i {
 	color: #fff;
 }
-
-
-.like-button {
-    cursor: pointer;
-}
-
-.like-button.liked i {
-    color: red; /* Cambia el color según tu preferencia */
-}
-
 
 
 .card-product:hover .button-group {
@@ -1090,7 +1088,9 @@ color: black;
   }
 
 
-
+.like-button i.liked {
+    color: red;  /* O el color que prefieras para indicar "like" */
+}
 
   @media (min-width: 769px) {
 	.menu {

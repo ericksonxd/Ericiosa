@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en" dir="ltr">
       <head>
         <meta charset="UTF-8">
@@ -57,12 +57,8 @@ if (isset($_POST['login'])) {
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row['password'])) {
-            $_SESSION['usuario_id'] = $row['id'];
+            $_SESSION['usuario_id'] = $row['id'];  // Asegúrate de cambiar 'id' al nombre real de tu columna
             $_SESSION['usuario'] = $row['nombre'];
-
-            // Limpiar el almacenamiento local de "likes" al cambiar de sesión
-            echo '<script>localStorage.clear();</script>';
-
             header("Location: index.php");
         } else {
             echo '<script>alert("Contraseña incorrecta")</script>';
@@ -70,8 +66,7 @@ if (isset($_POST['login'])) {
     } else {
         echo '<script>alert("Usuario no encontrado")</script>';
     }
-}
-
+ }    
 // Cerrar la conexión a la base de datos
 mysqli_close($conn);
 ?>
