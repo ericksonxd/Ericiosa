@@ -290,7 +290,6 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
 		></script>
 
 		<script src="../config/navbar.js" ></script>
-        <script src="../config/likes.js"></script>
 		<script>
 $(document).ready(function() {
     // Manejar clic en el botón "Me gusta" en productos destacados
