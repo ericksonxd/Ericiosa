@@ -313,6 +313,12 @@ $(document).ready(function() {
                 success: function(response) {
                     console.log(response);
 
+                    if (response.alert) {
+                        alert(response.alert);
+                        window.location.href = response.redirect;
+                        return;
+                    }
+
                     if (response.status === 'Like' || response.status === 'Unlike') {
                         likeButton.toggleClass('liked', response.status === 'Like');
                     }
