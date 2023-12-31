@@ -1,7 +1,16 @@
 
-
 <?php
 session_start();
+include '../config/conexion.php';
+
+$queryDestacados = "SELECT p.id_product, p.nombre, p.precio, p.imagen1, COUNT(l.id_like) as likes_count 
+                   FROM products p 
+                   LEFT JOIN likes l ON p.id_product = l.id_product
+                   WHERE p.destacado = 1
+                   GROUP BY p.id_product
+                   LIMIT 4";
+
+$resultadoDestacados = mysqli_query($conn, $queryDestacados);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +20,8 @@ session_start();
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>Ericiosa - Home</title>
 		<link rel="stylesheet" href="../public/css/indexstyle.css" />
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script src="../config/cookies.js" ></script>
 	</head>
 	<body>
 		<header>
@@ -141,43 +152,33 @@ session_start();
 			<section class="container top-products">
     <h1 class="heading-1">Productos Destacados</h1>
     <div class="container-products">
-        <?php
-        include '../config/conexion.php';
-
-        $queryDestacados = "SELECT id_product, nombre, precio, imagen1 FROM products WHERE destacado = 1 LIMIT 4";
-        $resultadoDestacados = mysqli_query($conn, $queryDestacados);
-
-        while ($filaDestacado = mysqli_fetch_assoc($resultadoDestacados)) {
-            echo '<div class="card-product">';
-            echo '<div class="container-img">';
-            echo '<a href="product.php?id=' . $filaDestacado['id_product'] . '" class="ws">';
-            echo '<img class="card-img" src="../private/images_product/' . $filaDestacado['imagen1'] . '" alt="" />';
-            echo '</a>';
-            echo '<div class="button-group">';
-            echo '<span>';
-            echo '<i class="fa-regular fa-heart"></i>'; /* aca esta donde aparecen los likes */
-            echo '</span>';
-            echo '<span>';
-            echo '<i class="fa-solid fa-code-compare"></i>';
-            echo '</span>';
-            echo '</div>';
-            echo '</div>';
-            echo '<div class="content-card-product">';
-            echo '<div class="separe"></div>';
-            echo '<a href="product.php?id=' . $filaDestacado['id_product'] . '" class="product-link">' . $filaDestacado['nombre'] . '</a>';
-            echo '<span class="add-cart">';
-            echo '<i class="fa-solid fa-basket-shopping"></i>';
-            echo '</span>';
-            echo '<p class="price">$' . $filaDestacado['precio'] . '</p>';
-            echo '</div>';
-            echo '</div>';
-        }
-
-        // Cerrar la conexión a la base de datos
-        mysqli_close($conn);
-        ?>
+        <?php while ($filaDestacado = mysqli_fetch_assoc($resultadoDestacados)) : ?>
+            <div class="card-product">
+                <div class="container-img">
+                    <a href="product.php?id=<?php echo $filaDestacado['id_product']; ?>" class="ws">
+                        <img class="card-img" src="../private/images_product/<?php echo $filaDestacado['imagen1']; ?>" alt="" />
+                    </a>
+                    <div class="button-group">
+                        <span class="like-button" data-post-id="<?php echo $filaDestacado['id_product']; ?>">
+                            <i class="fa-regular fa-heart"></i>
+                        </span>
+                        <span>
+                            <i class="fa-solid fa-code-compare"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="content-card-product">
+                    <div class="separe"></div>
+                    <a href="product.php?id=<?php echo $filaDestacado['id_product']; ?>" class="product-link"><?php echo $filaDestacado['nombre']; ?></a>
+                    <span class="add-cart">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                    </span>
+                    <p class="price">$<?php echo $filaDestacado['precio']; ?></p>
+                </div>
+            </div>
+        <?php endwhile; ?>
     </div>
-</section>>
+</section>
 
 			<section class="gallery">
 				<img
@@ -289,6 +290,68 @@ session_start();
 		></script>
 
 		<script src="../config/navbar.js" ></script>
-        <script src="../config/likes.js"></script
+        <script src="../config/likes.js"></script>
+		<script>
+$(document).ready(function() {
+    // Manejar clic en el botón "Me gusta" en productos destacados
+    $('.like-button').each(function() {
+        var postId = $(this).data('post-id');
+        var likeButton = $(this);
+
+        // Verificar si existe una cookie para este like
+        var likeCookie = getCookie("like_" + <?php echo isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0; ?> + "_" + postId);
+        if (likeCookie === '1') {
+            likeButton.addClass('liked');
+        }
+
+        likeButton.click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '../config/like_handler.php',
+                data: { like: postId },
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response);
+
+                    if (response.status === 'Like' || response.status === 'Unlike') {
+                        likeButton.toggleClass('liked', response.status === 'Like');
+                    }
+
+                    if (response.status === 'Like') {
+                        setCookie("like_" + <?php echo isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0; ?> + "_" + postId, "1", + (86400 * 30), '/');
+                    } else {
+                        setCookie("like_" + <?php echo isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0; ?> + "_" + postId, "0", -1, '/');
+                    }
+                },
+                error: function(error) {
+                    console.error('Error al procesar la solicitud: ', error);
+                }
+            });
+        });
+    });
+
+    // ... (otras funciones JavaScript si las tienes)
+});
+
+// Función para obtener el valor de una cookie
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+// Función para establecer una cookie
+function setCookie(name, value, seconds, path) {
+    var expires = "";
+    if (seconds) {
+        var date = new Date();
+        date.setTime(date.getTime() + (seconds * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=" + (path || "/");
+}
+</script>
+
+		
 	</body>
 </html>
