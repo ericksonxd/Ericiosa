@@ -45,11 +45,11 @@ if (isset($_GET['id'])) {
         $link_pinterest = $producto['link_pinterest'];
         $link_instagram = $producto['link_instagram'];
         
+        // Verificar si el usuario ha dado "Me gusta" al producto
+        $isLiked = checkIfUserLikedProduct($usuario_id, $id_producto);
+
         // Número de likes del producto actual
         $likes_count = $producto['likes_count'];
-
-        // Verificar si el usuario ha dado "Me gusta" al producto
-        $isLiked = $producto['is_liked'] > 0;
     } else {
         // Manejo si el producto no se encuentra
         echo "Producto no encontrado.";
@@ -80,8 +80,6 @@ function checkIfUserLikedProduct($userId, $productId)
 
     return $likeCount > 0;
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -312,7 +310,6 @@ function checkIfUserLikedProduct($userId, $productId)
 	</script>
 	<script src="https://kit.fontawesome.com/81581fb069.js" crossorigin="anonymous"></script>
 	<script src="../config/navbar.js"></script>
-	
 	<script>
 $(document).ready(function() {
     var productId = <?php echo $id_producto; ?>;
@@ -320,7 +317,7 @@ $(document).ready(function() {
     var likesCount = $('.likes-count');
 
     // Obtener el estado del like desde PHP
-    var isLiked = <?php echo isset($_SESSION['usuario_id']) && checkIfUserLikedProduct($_SESSION['usuario_id'], $id_producto) ? 'true' : 'false'; ?>;
+    var isLiked = <?php echo $isLiked ? 'true' : 'false'; ?>;
     
     // Aplicar la clase 'liked' y actualizar el color según el estado del like
     likeButton.toggleClass('liked', isLiked);
@@ -335,20 +332,24 @@ $(document).ready(function() {
             success: function(response) {
                 console.log(response);
 
-                // Actualizar la clase y el color del botón
-                likeButton.toggleClass('liked', response.status === 'Like');
-                likeButton.find('i').css('color', response.status === 'Like' ? 'red' : 'black');
+                if (response.alert) {
+                    alert(response.alert);
+                    window.location.href = response.redirect;
+                    return;
+                }
 
-                // Actualizar el número de likes con el formato correcto
-                likesCount.text('(' + response.likes_count + ')');
+                if (response.status === 'Like' || response.status === 'Unlike') {
+                    // Alternar la clase 'liked' y actualizar el color según el estado del like
+                    likeButton.toggleClass('liked', response.status === 'Like');
+                    likeButton.find('i').css('color', response.status === 'Like' ? 'red' : 'black');
 
-                // Actualizar el estado de isLiked
-                isLiked = response.status === 'Like';
+                    // Actualizar el número de likes con el formato correcto
+                    likesCount.text('(' + response.likes_count + ')');
+                }
 
-                // Actualizar la cookie si es necesario
                 if (response.status === 'Like') {
                     setCookie("like_" + <?php echo isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0; ?> + "_" + productId, "1", + (86400 * 30), '/');
-                } else if (response.status === 'Unlike') {
+                } else {
                     setCookie("like_" + <?php echo isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0; ?> + "_" + productId, "0", -1, '/');
                 }
             },
