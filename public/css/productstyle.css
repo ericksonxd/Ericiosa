@@ -19,6 +19,8 @@ html {
 	box-sizing: border-box;
 }
 
+
+
 /* ********************************** */
 /*             UTILIDADES             */
 /* ********************************** */
@@ -39,6 +41,7 @@ html {
 .container-hero {
 	background-color: var(--background-color);
 }
+
 
 .hero {
 	display: flex;
@@ -624,6 +627,16 @@ text-decoration: none;
 color: black;
 
 }
+
+.like-button i {
+    color: black; /* o el color predeterminado del ícono */
+    transition: color 0.3s; /* Agrega una transición para un cambio suave de color */
+}
+
+.like-button.liked i {
+    color: red; /* Cambia el color según tu preferencia */
+}
+
 
 .card-img{
 	max-width: 100%;

@@ -26,8 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
             // Eliminar la cookie del like
             setcookie("like_" . $user_id . "_" . $product_id, "", time() - 3600, '/');
             
+            // Obtener el nuevo contador de likes
+            $likes_count_query = "SELECT COUNT(*) FROM likes WHERE id_product = $product_id";
+            $likes_count_result = mysqli_query($conn, $likes_count_query);
+            $likes_count = mysqli_fetch_assoc($likes_count_result)['COUNT(*)'];
+
             // Asignar la respuesta al arreglo
             $response['status'] = 'Unlike';
+            $response['likes_count'] = $likes_count;
         } else {
             // Si no dio like, agregar el like
             $add_like_query = "INSERT INTO likes (id_user, id_product) VALUES ($user_id, $product_id)";
@@ -39,9 +45,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
 
             // Establecer la cookie del like
             setcookie("like_" . $user_id . "_" . $product_id, "1", time() + (86400 * 30), '/');
+            
+            // Obtener el nuevo contador de likes
+            $likes_count_query = "SELECT COUNT(*) FROM likes WHERE id_product = $product_id";
+            $likes_count_result = mysqli_query($conn, $likes_count_query);
+            $likes_count = mysqli_fetch_assoc($likes_count_result)['COUNT(*)'];
 
             // Asignar la respuesta al arreglo
             $response['status'] = 'Like';
+            $response['likes_count'] = $likes_count;
         }
     } else {
         // La sesión no está iniciada, asignar un mensaje de error a la respuesta

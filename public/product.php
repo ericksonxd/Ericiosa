@@ -2,55 +2,100 @@
 session_start();
 include '../config/conexion.php';
 
+// Obtener el usuario_id de la sesión
+$usuario_id = isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : null;
+
 // Verificar si se ha proporcionado un ID de producto
 if (isset($_GET['id'])) {
-	// Obtener el ID del producto desde la URL
-	$id_producto = $_GET['id'];
+    // Obtener el ID del producto desde la URL
+    $id_producto = $_GET['id'];
 
-	// Consultar la información del producto desde la base de datos
-	$query = "SELECT * FROM products WHERE id_product = $id_producto";
-	$resultado = mysqli_query($conn, $query);
+    // Consultar la información del producto desde la base de datos
+    $queryProducto = "SELECT p.*, COUNT(l.id_like) as likes_count,
+        (SELECT COUNT(*) FROM likes WHERE id_user = ? AND id_product = p.id_product) as is_liked
+        FROM products p 
+        LEFT JOIN likes l ON p.id_product = l.id_product
+        WHERE p.id_product = ?
+        GROUP BY p.id_product";
 
-	// Verificar si se encontró el producto
-	if ($producto = mysqli_fetch_assoc($resultado)) {
-		// Extraer información del producto
-		$nombre_producto = $producto['nombre'];
-		$precio_producto = $producto['precio'];
-		$descripcion_producto = $producto['descripcion'];
-		$imagen_principal = $producto['imagen1'];
-		$imagen1 = $producto['imagen1'];
-		$imagen2 = $producto['imagen2'];
-		$imagen3 = $producto['imagen3'];
-		$link_twitter = $producto['link_x'];
-		$link_youtube = $producto['link_youtube'];
-		$link_pinterest = $producto['link_pinterest'];
-		$link_instagram = $producto['link_instagram'];
-	} else {
-		// Manejo si el producto no se encuentra
-		echo "Producto no encontrado.";
-		exit;
-	}
+    // Preparar la consulta
+    $stmt = mysqli_prepare($conn, $queryProducto);
+
+    // Vincular los parámetros
+    mysqli_stmt_bind_param($stmt, "ii", $usuario_id, $id_producto);
+
+    // Ejecutar la consulta
+    mysqli_stmt_execute($stmt);
+
+    // Obtener el resultado
+    $resultadoProducto = mysqli_stmt_get_result($stmt);
+
+    // Verificar si se encontró el producto
+    if ($producto = mysqli_fetch_assoc($resultadoProducto)) {
+        // Extraer información del producto
+        $nombre_producto = $producto['nombre'];
+        $precio_producto = $producto['precio'];
+        $descripcion_producto = $producto['descripcion'];
+        $imagen_principal = $producto['imagen1'];
+        $imagen1 = $producto['imagen1'];
+        $imagen2 = $producto['imagen2'];
+        $imagen3 = $producto['imagen3'];
+        $link_twitter = $producto['link_x'];
+        $link_youtube = $producto['link_youtube'];
+        $link_pinterest = $producto['link_pinterest'];
+        $link_instagram = $producto['link_instagram'];
+        
+        // Número de likes del producto actual
+        $likes_count = $producto['likes_count'];
+
+        // Verificar si el usuario ha dado "Me gusta" al producto
+        $isLiked = $producto['is_liked'] > 0;
+    } else {
+        // Manejo si el producto no se encuentra
+        echo "Producto no encontrado.";
+        exit;
+    }
+
+    // Cerrar la consulta preparada
+    mysqli_stmt_close($stmt);
 } else {
-	// Manejo si no se proporciona un ID de producto
-	echo "ID de producto no proporcionado.";
-	header("Location: catalogo.php");
-
-	exit;
+    // Manejo si no se proporciona un ID de producto
+    echo "ID de producto no proporcionado.";
+    header("Location: catalogo.php");
+    exit;
 }
+
+function checkIfUserLikedProduct($userId, $productId)
+{
+    global $conn;
+
+    // Verifica si el usuario ha dado "Me gusta" al producto
+    $query = "SELECT COUNT(*) FROM likes WHERE id_user = ? AND id_product = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "ii", $userId, $productId);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $likeCount);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
+
+    return $likeCount > 0;
+}
+
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Ericiosa -
-		<?php echo $nombre_producto; ?>
-	</title>
-	<link rel="stylesheet" href="../public/css/productstyle.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../config/cookies.js"></script>
+    <title>Ericiosa - <?php echo $nombre_producto; ?></title>
+    <link rel="stylesheet" href="../public/css/productstyle.css" />
 </head>
+
 
 <body>
 	<header>
@@ -139,22 +184,21 @@ if (isset($_GET['id'])) {
 						</div>
 					</div>
 					<div class="basic-info">
-    <h1>
-        <?php echo $nombre_producto; ?>
-    </h1>
+    <h1><?php echo $nombre_producto; ?></h1>
     <span class="actions">
         <!-- Agregar la clase "like-button" y el atributo data-post-id al contenedor span -->
-		<span class="like-button" data-post-id="<?php echo $fila['id_product']; ?>">
-    <i class="fa-regular fa-heart"></i>
+		<span class="like-button" data-post-id="<?php echo $id_producto; ?>">
+        <i class="fa-regular fa-heart"></i>
+    </span>
+    <!-- Mostrar el número de likes -->
+	<span class="likes-count">(<?php echo $likes_count; ?>)</span>
 </span>
-			<span>$
-							<?php echo $precio_producto; ?>
-						</span>
-						<div class="options">
-							<a href="#">Comprar Ahora</a>
-							<a href="#">Añadir Al carrito</a>
-						</div>
-					</div>
+    <span>$<?php echo $precio_producto; ?></span>
+    <div class="options">
+        <a href="#">Comprar Ahora</a>
+        <a href="#">Añadir Al carrito</a>
+    </div>
+</div>
 					<div class="description">
 						<p>
 							<?php echo $descripcion_producto; ?>
@@ -268,6 +312,55 @@ if (isset($_GET['id'])) {
 	</script>
 	<script src="https://kit.fontawesome.com/81581fb069.js" crossorigin="anonymous"></script>
 	<script src="../config/navbar.js"></script>
+	
+	<script>
+$(document).ready(function() {
+    var productId = <?php echo $id_producto; ?>;
+    var likeButton = $('.like-button');
+    var likesCount = $('.likes-count');
+
+    // Obtener el estado del like desde PHP
+    var isLiked = <?php echo isset($_SESSION['usuario_id']) && checkIfUserLikedProduct($_SESSION['usuario_id'], $id_producto) ? 'true' : 'false'; ?>;
+    
+    // Aplicar la clase 'liked' y actualizar el color según el estado del like
+    likeButton.toggleClass('liked', isLiked);
+    likeButton.find('i').css('color', isLiked ? 'red' : 'black');
+
+    likeButton.click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '../config/like_handler.php',
+            data: { like: productId },
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+
+                // Actualizar la clase y el color del botón
+                likeButton.toggleClass('liked', response.status === 'Like');
+                likeButton.find('i').css('color', response.status === 'Like' ? 'red' : 'black');
+
+                // Actualizar el número de likes con el formato correcto
+                likesCount.text('(' + response.likes_count + ')');
+
+                // Actualizar el estado de isLiked
+                isLiked = response.status === 'Like';
+
+                // Actualizar la cookie si es necesario
+                if (response.status === 'Like') {
+                    setCookie("like_" + <?php echo isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0; ?> + "_" + productId, "1", + (86400 * 30), '/');
+                } else if (response.status === 'Unlike') {
+                    setCookie("like_" + <?php echo isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0; ?> + "_" + productId, "0", -1, '/');
+                }
+            },
+            error: function(error) {
+                console.error('Error al procesar la solicitud: ', error);
+            }
+        });
+    });
+
+    // Otras funciones JavaScript si las tienes
+});
+</script>
 </body>
 
 </html>
