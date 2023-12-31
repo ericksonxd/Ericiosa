@@ -1,4 +1,4 @@
-
+// Funciones para manejar cookies
 function setCookie(name, value, days) {
     var expires = '';
     if (days) {
