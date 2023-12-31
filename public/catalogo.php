@@ -1,15 +1,19 @@
-<?php
-session_start();
-include '../config/conexion.php';
+	<?php
+	session_start();
+	include '../config/conexion.php';
 
-// Consultar los productos desde la base de datos con el recuento de likes
-$query = "SELECT p.id_product, p.nombre, p.precio, p.imagen1, COUNT(l.id_like) as likes_count 
-          FROM products p 
-          LEFT JOIN likes l ON p.id_product = l.id_product
-          GROUP BY p.id_product";
-$resultado = mysqli_query($conn, $query);
+	// Consultar los productos desde la base de datos
+	$query = "SELECT id_product, nombre, precio, imagen1 FROM products";
+	$resultado = mysqli_query($conn, $query);
 
-?>
+	if (isset($_SESSION["usuario"]) && isset($_SESSION["usuario_id"])) {
+		// Si el usuario está conectado, muestra el nombre, enlace al perfil y enlace de logout
+		echo '<span class="username">' . $_SESSION["usuario"] . '</span>';
+		echo '<a href="perfil.php"><i class="fa-solid fa-user"></i></a>';
+		echo '<a href="../config/logout.php" class="logout-button" ><i class="fa-solid fa-right-from-bracket"></i></a>';
+		// ... Resto del código
+	}
+	?>
 
 		<!DOCTYPE html>
 		<html lang="en" dir="ltr">	
@@ -18,8 +22,8 @@ $resultado = mysqli_query($conn, $query);
 			<title>Ericiosa - Catalogo</title>
 			<link rel="stylesheet" href="css/catalogostyle.css">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-            <script src="../config/cookies.js" ></script>
+
+
 		</head>
 		<body>
 		<header>
@@ -96,9 +100,9 @@ $resultado = mysqli_query($conn, $query);
             </a>
             <div class="button-group">
                 <!-- Agregar la clase "like-button" y el atributo data-post-id al contenedor span -->
-				<span class="like-button" data-post-id="<?php echo $fila['id_product']; ?>">
-    <i class="fa-regular fa-heart"></i>
-</span>
+                <span class="like-button" >
+                    <i class="fa-regular fa-heart"></i>
+                </span>
                 <span>
                     <i class="fa-solid fa-code-compare"></i>
                 </span>
@@ -209,49 +213,7 @@ $resultado = mysqli_query($conn, $query);
 
 	<script defer src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" type="module"></script>
 	<script defer nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-	<script>
-$(document).ready(function() {
-    $('.like-button').each(function() {
-        var postId = $(this).data('post-id');
-        var likeButton = $(this);
-        var userId = <?php echo isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 'null'; ?>;
-        var likedState = getCookie('like_' + userId + '_' + postId);
 
-        if (likedState === 'liked') {
-            likeButton.addClass('liked');
-        }
-
-        likeButton.click(function() {
-            $.ajax({
-                type: 'POST',
-                url: '../config/like_handler.php',
-                data: { like: postId },
-                success: function(response) {
-                    if (response.error) {
-                        alert(response.error);
-                        window.location.href = 'login.php';
-                        return;
-                    }
-
-                    var action = response.action;
-                    var likeId = response.like_id;
-
-                    if (action === 'Like') {
-                        setCookie('like_' + userId + '_' + postId, 'liked', 365);
-                    } else {
-                        deleteCookie('like_' + userId + '_' + postId);
-                    }
-
-                    console.log(response);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        });
-    });
-});
-</script>
 	</body>
 	</html>
 

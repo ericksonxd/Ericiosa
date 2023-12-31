@@ -518,15 +518,6 @@ transition:0.3s ;
 	color: #fff;
 }
 
-.like-button {
-    cursor: pointer;
-}
-
-.like-button.liked i {
-    color: red; /* Cambia el color según tu preferencia */
-}
-
-
 .card-product:hover .button-group {
 	z-index: 0;
 	right: -1rem;
@@ -1087,7 +1078,24 @@ color: black;
 	
   }
 
+  .custom-button {
+    /* Estilos anteriores que mantenías */
+    border: none;
+    background: none;
+    cursor: pointer;
+}
 
+.custom-button.liked {
+    color: red;
+}
+
+  .like-button {
+    cursor: pointer;
+}
+
+.like-button.liked {
+    color: red; /* Cambia el color del like cuando está activo */
+}
 
 
   @media (min-width: 769px) {

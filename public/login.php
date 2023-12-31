@@ -40,41 +40,39 @@
         </div>
     </div>
     
-    <?php
-session_start();
-include '../config/conexion.php';
 
-if (isset($_SESSION['usuario'])) {
-    header("Location: index.php");
-}
+          <?php
+    session_start();
+    include '../config/conexion.php';
 
-if (isset($_POST['login'])) {
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-
-    $sql = "SELECT * FROM `usuarios` WHERE email = '$email'";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_assoc($result);
-        if (password_verify($password, $row['password'])) {
-            $_SESSION['usuario_id'] = $row['id'];
-            $_SESSION['usuario'] = $row['nombre'];
-
-            // Limpiar el almacenamiento local de "likes" al cambiar de sesión
-            echo '<script>localStorage.clear();</script>';
-
-            header("Location: index.php");
-        } else {
-            echo '<script>alert("Contraseña incorrecta")</script>';
-        }
-    } else {
-        echo '<script>alert("Usuario no encontrado")</script>';
+    if (isset($_SESSION['usuario'])) {
+        header("Location: index.php");
     }
-}
 
-// Cerrar la conexión a la base de datos
-mysqli_close($conn);
-?>
+    if (isset($_POST['login'])) {
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+        $sql = "SELECT * FROM `usuarios` WHERE email = '$email'";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_assoc($result);
+            if (password_verify($password, $row['password'])) {
+                $_SESSION['usuario'] = $row['nombre'];
+                header("Location: index.php");
+            } else {
+                echo '<script>alert("Contraseña incorrecta")</script>';
+            }
+        } else {
+            echo '<script>alert("Usuario no encontrado")</script>';
+        }
+    }
+
+    mysqli_close($conn);
+    ?>
+
+
 
      
           </div>
