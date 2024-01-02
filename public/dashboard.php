@@ -33,11 +33,11 @@ mysqli_close($conn);
 <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Dashboard Ericiosa</title>
+    <title>Dashboard - Ericiosa</title>
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
- <link rel="stylesheet" href="../public/css/adminstyle.css">
+    <link rel="stylesheet" href="../public/css/adminstyle.css">
 </head>
 
 <body>
@@ -59,13 +59,14 @@ mysqli_close($conn);
                 <nav class="nav">
                     <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
                                 class="nav_logo-name">Ericiosa - Admin</span> </a>
-                        <div class="nav_list"> <a href="#" class="nav_link active"> <i
+                        <div class="nav_list"> <a href="dashboard.php" class="nav_link active"> <i
                                     class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> <a
-                                href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
-                                    class="nav_name">Usuarios</span> </a> <a href="adminproduct.php" class="nav_link"> <i
-                                    class='bx bx-folder nav_icon'></i> <span class="nav_name">Productos</span> </a> <a
-                                href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
+                                href="adminusers.php" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
+                                    class="nav_name">Usuarios</span> </a> <a href="adminproduct.php" class="nav_link">
+                                <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Productos</span> </a> <a
+                                href="adminstats.php" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
                                     class="nav_name">Stats</span> </a>
+                                    <a href="adminmail.php" class="nav_link"><i class='bx bx-envelope'></i><span class="nav_name">Mails</span> </a>
                         </div>
                     </div> <a href="../config/logout.php" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
                             class="nav_name">Cerrar Sesion</span> </a>
@@ -76,7 +77,7 @@ mysqli_close($conn);
                 <h4>Main Components</h4>
 
 
-           
+
 
 
             </div>

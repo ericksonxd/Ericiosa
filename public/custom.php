@@ -1,5 +1,70 @@
 <?php
 session_start();
+include "../config/conexion.php";
+require '../vendor/autoload.php'; // Incluye el autoloader de Composer
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+// Verifica la conexión con la base de datos
+if (!$conn) {
+    die("Conexión fallida: " . mysqli_connect_error());
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Procesar el formulario de pedido personalizado
+    $user_name = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : (isset($_POST['user_name']) ? $_POST['user_name'] : '');
+    $user_email = isset($_SESSION['usuario_email']) ? $_SESSION['usuario_email'] : (isset($_POST['user_email']) ? $_POST['user_email'] : '');
+    $event_date = isset($_POST['event_date']) ? $_POST['event_date'] : '';
+    $contact_number = isset($_POST['contact_number']) ? $_POST['contact_number'] : '';
+    $address = isset($_POST['address']) ? $_POST['address'] : '';
+    $order_details = isset($_POST['order_details']) ? $_POST['order_details'] : '';
+
+    // Insertar el pedido en la base de datos
+    $sql = "INSERT INTO custom_orders (user_name, user_email, event_date, contact_number, address, order_details)
+            VALUES ('$user_name', '$user_email', '$event_date', '$contact_number', '$address', '$order_details')";
+
+    if (mysqli_query($conn, $sql)) {
+
+
+        // Configuración de PHPMailer
+        $mail = new PHPMailer(true);
+        try {
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                      //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'erick.pereira6677@gmail.com';         //SMTP username
+            $mail->Password   = 'ozzh nsht zngo qyjk';                         //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;        //Enable implicit TLS encryption
+            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom('erick.pereira6677@gmail.com', 'Ericiosa');
+            $mail->addAddress('erick.pereira6677@gmail.com', 'Usuario Temporal');     // Cambia a tu correo temporal
+            $mail->addReplyTo('info@example.com', 'Information');
+
+            // Contenido del correo
+            $mail->isHTML(true);
+            $mail->Subject = 'Pedido personalizado de ' . $user_name . ' - Ericiosa';
+            $mail->Body = "Nombre: $user_name <br> Correo: $user_email <br> Fecha del evento: $event_date <br> Teléfono: $contact_number <br> Dirección: $address <br> Detalles: $order_details";
+
+            // Enviar el correo
+			$mail->send();
+            
+            // Alerta en JavaScript
+            echo '<script>alert("Correo enviado correctamente");</script>';
+        } catch (Exception $e) {
+            echo '<script>alert("Error al enviar el correo: ' . $mail->ErrorInfo . '");</script>';
+        }
+    } else {
+        echo '<script>alert("Error al enviar el pedido: ' . mysqli_error($conn) . '");</script>';
+    }
+}
+
+mysqli_close($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +73,7 @@ session_start();
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>Ericiosa - Custom Order</title>
-		<link rel="stylesheet" href="../public/css/customstyle.css" />
+		<link rel="stylesheet" href="../public/css/customstyle.css"/>
 	</head>
 	<body>
 		<header>
@@ -83,35 +148,28 @@ session_start();
 <br>
 
 
-<div class="custom-order-form"  >
-<form action="order.php" method="POST"  >
-<div class="form-body">
-<i class="fa-regular fa-user"></i>
-<input type="text" placeholder="Nombre Completo">
-<i class="fa-regular fa-envelope"></i>
-<input type="email" placeholder="Ingresa tu correo electrónico">
-<i class="fa-regular fa-calendar-days"></i><span>Fecha del evento</span>
-<input type="date">
-<i class="fa-brands fa-whatsapp"></i>
-<input type="number" placeholder="Ingresa tu número de contacto">
-<i class="fa-solid fa-location-dot"></i>
-<input type="text" placeholder="ingresa tu Dirección">  
-<i class="fa-solid fa-circle-info"></i>
-<span>Detalles de la orden</span>
-<br>
- <textarea id="description" cols="30" rows="10" minlength="20"  maxlength="569" required  placeholder="Ingresa una breve descripcion del producto..." ></textarea>
-
-<br>
-<input type="submit" class="send" value="Enviar Orden">
-
+<div class="custom-order-form">
+    <form action="" method="POST">
+        <div class="form-body">
+            <i class="fa-regular fa-user"></i>
+            <input type="text" name="user_name" placeholder="Nombre Completo">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" name="user_email" placeholder="Ingresa tu correo electrónico">
+            <i class="fa-regular fa-calendar-days"></i><span>Fecha del evento</span>
+            <input type="date" name="event_date">
+            <i class="fa-brands fa-whatsapp"></i>
+            <input type="number" name="contact_number" placeholder="Ingresa tu número de contacto">
+            <i class="fa-solid fa-location-dot"></i>
+            <input type="text" name="address" placeholder="Ingresa tu Dirección">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Detalles de la orden</span>
+            <br>
+            <textarea name="order_details" id="description" cols="30" rows="10" minlength="20" maxlength="569" required placeholder="Ingresa una breve descripción del producto..."></textarea>
+            <br>
+            <input type="submit" class="send" value="Enviar Orden">
+        </div>
+    </form>
 </div>
-
-
-
-</form>
-</div>
-
-
 
 </div>
 

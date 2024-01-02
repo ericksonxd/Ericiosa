@@ -34,7 +34,7 @@ if (!$result) {
 <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Productos - Ericiosa</title>
+    <title>Usuarios - Ericiosa</title>
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
@@ -55,15 +55,15 @@ if (!$result) {
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
-                        class="nav_logo-name">Productos - Ericiosa</span> </a>
+                        class="nav_logo-name">Ericiosa - Admin</span> </a>
                 <div class="nav_list"> <a href="dashboard.php" class="nav_link"> <i
                             class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> <a
-                        href="adminusers.php" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
-                            class="nav_name">Usuarios</span> </a> <a href="adminproduct.php" class="nav_link active"> <i
+                        href="adminusers.php" class="nav_link active"> <i class='bx bx-user nav_icon'></i> <span
+                            class="nav_name">Usuarios</span> </a> <a href="adminproduct.php" class="nav_link"> <i
                             class='bx bx-folder nav_icon'></i> <span class="nav_name">Productos</span> </a> <a
-                        href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
+                        href="adminstats.php" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
                             class="nav_name">Stats</span> </a>
-                    <a href="adminmail.php" class="nav_link"><i class='bx bx-envelope'></i><span class="nav_name">Mails</span> </a>
+                        <a href="adminmail.php" class="nav_link"><i class='bx bx-envelope'></i><span class="nav_name">Mails</span> </a>
                 </div>
             </div> <a href="../config/logout.php" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
                     class="nav_name">Cerrar Sesion</span> </a>
@@ -72,12 +72,12 @@ if (!$result) {
 
     <!-- Container Main start -->
     <div class="height-100 bg-light">
-        <h4>Productos</h4>
+        <h4>Usuarios</h4>
 
         <!-- Search Form -->
         <form method="POST" action="">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Buscar producto" name="search">
+                <input type="text" class="form-control" placeholder="Buscar usuario" name="search">
                 <button class="btn btn-outline-secondary" type="submit" name="submit">Buscar</button>
             </div>
         </form>
@@ -86,10 +86,10 @@ if (!$result) {
         // Procesar la búsqueda
         if (isset($_POST['submit'])) {
             $search = $_POST['search'];
-            $query = "SELECT * FROM products WHERE id_product LIKE '%$search%' OR nombre LIKE '%$search%' OR descripcion LIKE '%$search%' OR precio LIKE '%$search%'";
+            $query = "SELECT * FROM usuarios WHERE id LIKE '%$search%' OR nombre LIKE '%$search%' OR email LIKE '%$search%' OR telefono LIKE '%$search%' OR usuario LIKE '%$search%'";
         } else {
-            // Consultar todos los productos desde la base de datos
-            $query = "SELECT * FROM products";
+            // Consultar todos los usuarios desde la base de datos
+            $query = "SELECT * FROM usuarios";
         }
 
         // Ejecutar la consulta
@@ -100,17 +100,15 @@ if (!$result) {
             exit();
         }
 
-        // Mostrar los productos en la tabla
+        // Mostrar los usuarios en la tabla
         echo '<table class="table">';
         echo '<thead>';
         echo '<tr>';
         echo '<th scope="col">ID</th>';
         echo '<th scope="col">Nombre</th>';
-        echo '<th scope="col">Descripcion</th>';
-        echo '<th scope="col">Precio</th>';
-        echo '<th scope="col">Likes</th>';
-        echo '<th scope="col">Links</th>';
-        echo '<th scope="col">Imagenes</th>';
+        echo '<th scope="col">Username</th>';
+        echo '<th scope="col">Email</th>';
+        echo '<th scope="col">Telefono</th>';
         echo '<th scope="col">Acciones</th>';
         echo '</tr>';
         echo '</thead>';
@@ -118,29 +116,13 @@ if (!$result) {
 
         while ($row = mysqli_fetch_assoc($result)) {
             echo '<tr>';
-            echo '<td>' . $row['id_product'] . '</td>';
+            echo '<td>' . $row['id'] . '</td>';
             echo '<td>' . $row['nombre'] . '</td>';
-            echo '<td>' . $row['descripcion'] . '</td>';
-            echo '<td>' . $row['precio'] . '</td>';
-            echo '<td>' . $row['likes'] . '</td>';
+            echo '<td>' . $row['usuario'] . '</td>';
+            echo '<td>' . $row['email'] . '</td>';
+            echo '<td>' . $row['telefono'] . '</td>';
             echo '<td>';
-            echo '<a href="' . $row['link_x'] . '">Twitter</a> | ';
-            echo '<a href="' . $row['link_pinterest'] . '">Pinterest</a> | ';
-            echo '<a href="' . $row['link_instagram'] . '">Instagram</a> | ';
-            echo '<a href="' . $row['link_youtube'] . '">YouTube</a>';
-            echo '</td>';
-            echo '<td>';
-            echo '<img src="../private/images_product/' . $row['imagen1'] . '" alt="Imagen 1" width="50">';
-            echo '<img src="../private/images_product/' . $row['imagen2'] . '" alt="Imagen 2" width="50">';
-            echo '<img src="../private/images_product/' . $row['imagen3'] . '" alt="Imagen 3" width="50">';
-            echo '</td>';
-            echo '<td>';
-            if ($row['destacado'] == 1) {
-                echo '<button class="btn btn-info" onclick="toggleDestacado(' . $row['id_product'] . ', false)">Quitar Destacado</button>';
-            } else {
-                echo '<button class="btn btn-warning" onclick="toggleDestacado(' . $row['id_product'] . ', true)">Destacar</button>';
-            }
-            echo ' | <a class="btn btn-success" href="editar_producto.php?id=' . $row['id_product'] . '">Editar</a> | <button class="btn btn-danger" onclick="eliminarProducto(' . $row['id_product'] . ')">Eliminar</button>';
+            echo '<button class="btn btn-danger" onclick="eliminarUsuario(' . $row['id'] . ')">Eliminar</button>';
             echo '</td>';
             echo '</tr>';
         }
@@ -154,45 +136,27 @@ if (!$result) {
         src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
     <script src="../config/sidebar.js"></script>
     <script type='text/javascript'>
-        function eliminarProducto(idProducto) {
-            console.log('ID del producto a eliminar:', idProducto);
+        function eliminarUsuario(idUsuario) {
+            console.log('ID del usuario a eliminar:', idUsuario);
 
-            if (confirm('¿Seguro que deseas eliminar este producto?')) {
+            if (confirm('¿Seguro que deseas eliminar este usuario?')) {
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == 4) {
                         if (xhr.status == 200) {
                             // Manejar la respuesta del servidor (puedes mostrar un mensaje de éxito, recargar la página, etc.)
                             alert(xhr.responseText);
-                            // Puedes recargar la página para actualizar la lista de productos
+                            // Puedes recargar la página para actualizar la lista de usuarios
                             location.reload();
                         } else {
                             // Manejar cualquier error
-                            alert('Error al intentar eliminar el producto');
+                            alert('Error al intentar eliminar el usuario');
                         }
                     }
                 };
-                xhr.open('GET', '../config/eliminar_producto.php?id=' + idProducto, true);
+                xhr.open('GET', '../config/eliminar_usuario.php?id=' + idUsuario, true);
                 xhr.send();
             }
-        }
-
-        function toggleDestacado(idProducto, destacar) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        // Manejar la respuesta del servidor
-                        alert(xhr.responseText);
-                        // Recargar la página para reflejar los cambios
-                        location.reload();
-                    } else {
-                        alert('Error al intentar destacar/quitar destacado el producto');
-                    }
-                }
-            };
-            xhr.open('GET', '../config/toggle_destacado.php?id=' + idProducto + '&destacar=' + destacar, true);
-            xhr.send();
         }
     </script>
 </body>
