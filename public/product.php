@@ -345,6 +345,7 @@ $(document).ready(function() {
 
                     // Actualizar el número de likes con el formato correcto
                     likesCount.text('(' + response.likes_count + ')');
+					console.log('Número de likes actualizado:', response.likes_count);
                 }
 
                 if (response.status === 'Like') {

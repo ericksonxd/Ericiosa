@@ -223,6 +223,7 @@ if (!$result_messages) {
             e.preventDefault();
         });
     </script>
+    <script src="../config/sidebar.js" ></script>
 </body>
 
 </html>

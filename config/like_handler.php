@@ -23,16 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
             $delete_user_like_query = "DELETE FROM user_likes WHERE id_user = $user_id AND id_product = $product_id";
             mysqli_query($conn, $delete_user_like_query);
 
-            // Eliminar la cookie del like
-            setcookie("like_" . $user_id . "_" . $product_id, "", time() - 3600, '/');
-            
             // Obtener el número actualizado de likes para el producto
             $likes_count_query = "SELECT COUNT(id_like) as likes_count FROM likes WHERE id_product = $product_id";
             $likes_count_result = mysqli_query($conn, $likes_count_query);
             $likes_count_row = mysqli_fetch_assoc($likes_count_result);
-            $response['likes_count'] = $likes_count_row['likes_count'];
+            $likes_count = $likes_count_row['likes_count'];
+
+            // Actualizar la columna likes en la tabla products
+            $update_likes_count_query = "UPDATE products SET likes = $likes_count WHERE id_product = $product_id";
+            mysqli_query($conn, $update_likes_count_query);
 
             // Asignar la respuesta al arreglo
+            $response['likes_count'] = $likes_count;
             $response['status'] = 'Unlike';
         } else {
             // Si no dio like, agregar el like
@@ -43,16 +45,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
             $insert_user_like_query = "INSERT IGNORE INTO user_likes (id_user, id_product) VALUES ($user_id, $product_id)";
             mysqli_query($conn, $insert_user_like_query);
 
-            // Establecer la cookie del like
-            setcookie("like_" . $user_id . "_" . $product_id, "1", time() + (86400 * 30), '/');
-            
             // Obtener el número actualizado de likes para el producto
             $likes_count_query = "SELECT COUNT(id_like) as likes_count FROM likes WHERE id_product = $product_id";
             $likes_count_result = mysqli_query($conn, $likes_count_query);
             $likes_count_row = mysqli_fetch_assoc($likes_count_result);
-            $response['likes_count'] = $likes_count_row['likes_count'];
+            $likes_count = $likes_count_row['likes_count'];
+
+            // Actualizar la columna likes en la tabla products
+            $update_likes_count_query = "UPDATE products SET likes = $likes_count WHERE id_product = $product_id";
+            mysqli_query($conn, $update_likes_count_query);
 
             // Asignar la respuesta al arreglo
+            $response['likes_count'] = $likes_count;
             $response['status'] = 'Like';
         }
     } else {

@@ -24,25 +24,24 @@ if (!$result) {
     $admin_nombre = $admin_data['nombre'] ?? ''; // Initialize $admin_nombre with an empty string if not set
 }
 
-// No cerrar la conexión aquí para poder realizar la consulta después
-
+// Close the database connection
+mysqli_close($conn);
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Productos - Ericiosa</title>
-    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet'>
-    <link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard Ericiosa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../public/css/adminstyle.css">
 </head>
 
 <body id="body-pd">
-
     <header class="header" id="header">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i></div>
         <div class="header_img">
@@ -51,29 +50,31 @@ if (!$result) {
             </h6>
         </div>
     </header>
-
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
-            <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
-                        class="nav_logo-name">Productos - Ericiosa</span> </a>
-                <div class="nav_list"> <a href="dashboard.php" class="nav_link"> <i
-                            class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> <a
-                        href="adminusers.php" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
-                            class="nav_name">Usuarios</span> </a> <a href="adminproduct.php" class="nav_link active"> <i
-                            class='bx bx-folder nav_icon'></i> <span class="nav_name">Productos</span> </a> <a
-                        href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
+            <div>
+                <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
+                        class="nav_logo-name">Ericiosa - Admin</span> </a>
+                <div class="nav_list">
+                    <a href="dashboard.php" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span
+                            class="nav_name">Dashboard</span> </a>
+                    <a href="adminusers.php" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
+                            class="nav_name">Usuarios</span> </a>
+                    <a href="adminproduct.php" class="nav_link active"> <i class='bx bx-folder nav_icon'></i> <span
+                            class="nav_name">Productos</span> </a>
+                    <a href="adminstats.php" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
                             class="nav_name">Stats</span> </a>
-                    <a href="adminmail.php" class="nav_link"><i class='bx bx-envelope'></i><span class="nav_name">Mails</span> </a>
+                    <a href="adminmail.php" class="nav_link"><i class='bx bx-envelope'></i><span
+                            class="nav_name">Mails</span> </a>
                 </div>
-            </div> <a href="../config/logout.php" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
-                    class="nav_name">Cerrar Sesion</span> </a>
+            </div>
+            <a href="../config/logout.php" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Cerrar Sesion</span> </a>
         </nav>
     </div>
-
-    <!-- Container Main start -->
     <div class="height-100 bg-light">
         <h4>Productos</h4>
-
+        <a class="btn btn-dark" href="./addproduct.php ">Añadir Producto</a>
+        <hr>
         <!-- Search Form -->
         <form method="POST" action="">
             <div class="input-group mb-3">
@@ -82,78 +83,81 @@ if (!$result) {
             </div>
         </form>
 
-        <?php
-        // Procesar la búsqueda
-        if (isset($_POST['submit'])) {
-            $search = $_POST['search'];
-            $query = "SELECT * FROM products WHERE id_product LIKE '%$search%' OR nombre LIKE '%$search%' OR descripcion LIKE '%$search%' OR precio LIKE '%$search%'";
-        } else {
-            // Consultar todos los productos desde la base de datos
-            $query = "SELECT * FROM products";
-        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">likes</th>
+                    <th scope="col">links</th>
+                    <th scope="col">imagen1</th>
+                    <th scope="col">imagen2</th>
+                    <th scope="col">imagen3</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Incluir el archivo de conexión a la base de datos
+                include '../config/conexion.php';
 
-        // Ejecutar la consulta
-        $result = mysqli_query($conn, $query);
+                // Procesar la búsqueda
+                if (isset($_POST['submit'])) {
+                    $search = $_POST['search'];
+                    $query = "SELECT * FROM products WHERE nombre LIKE '%$search%' OR descripcion LIKE '%$search%' OR precio LIKE '%$search%' OR likes LIKE '%$search%'";
+                } else {
+                    // Consultar todos los productos desde la base de datos
+                    $query = "SELECT * FROM products";
+                }
 
-        if (!$result) {
-            echo "Error en la consulta: " . mysqli_error($conn);
-            exit();
-        }
+                // Ejecutar la consulta
+                $resultado = mysqli_query($conn, $query); // Cambiado de $conexion a $conn
 
-        // Mostrar los productos en la tabla
-        echo '<table class="table">';
-        echo '<thead>';
-        echo '<tr>';
-        echo '<th scope="col">ID</th>';
-        echo '<th scope="col">Nombre</th>';
-        echo '<th scope="col">Descripcion</th>';
-        echo '<th scope="col">Precio</th>';
-        echo '<th scope="col">Likes</th>';
-        echo '<th scope="col">Links</th>';
-        echo '<th scope="col">Imagenes</th>';
-        echo '<th scope="col">Acciones</th>';
-        echo '</tr>';
-        echo '</thead>';
-        echo '<tbody>';
+                // Mostrar los productos en la tabla
+                while ($fila = mysqli_fetch_assoc($resultado)) {
+                    echo '<tr>';
+                    echo '<td>' . $fila['id_product'] . '</td>';
+                    echo '<td>' . $fila['nombre'] . '</td>';
+                    echo '<td>' . $fila['descripcion'] . '</td>';
+                    echo '<td>' . $fila['precio'] . '</td>';
+                    echo '<td>' . $fila['likes'] . '</td>';  /* aca esta donde aparecen los likes */
+                    echo '<td>';
+                    echo '<a href="' . $fila['link_x'] . '">Twitter</a> | ';
+                    echo '<a href="' . $fila['link_pinterest'] . '">Pinterest</a> | ';
+                    echo '<a href="' . $fila['link_instagram'] . '">Instagram</a> | ';
+                    echo '<a href="' . $fila['link_youtube'] . '">YouTube</a>';
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<img src="../private/images_product/' . $fila['imagen1'] . '" alt="Imagen 1" width="50">';
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<img src="../private/images_product/' . $fila['imagen2'] . '" alt="Imagen 2" width="50">';
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<img src="../private/images_product/' . $fila['imagen3'] . '" alt="Imagen 3" width="50">';
+                    echo '</td>';
+                    echo '<td>';
+                    if ($fila['destacado'] == 1) {
+                        echo '<button class="btn btn-info" onclick="toggleDestacado(' . $fila['id_product'] . ', false)">Quitar Destacado</button>';
+                    } else {
+                        echo '<button class="btn btn-warning" onclick="toggleDestacado(' . $fila['id_product'] . ', true)">Destacar</button>';
+                    }
+                    echo ' | <a class="btn btn-success" href="editar_producto.php?id=' . $fila['id_product'] . '">Editar</a> | <button class="btn btn-danger" onclick="eliminarProducto(' . $fila['id_product'] . ')">Eliminar</button>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
 
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo '<tr>';
-            echo '<td>' . $row['id_product'] . '</td>';
-            echo '<td>' . $row['nombre'] . '</td>';
-            echo '<td>' . $row['descripcion'] . '</td>';
-            echo '<td>' . $row['precio'] . '</td>';
-            echo '<td>' . $row['likes'] . '</td>';
-            echo '<td>';
-            echo '<a href="' . $row['link_x'] . '">Twitter</a> | ';
-            echo '<a href="' . $row['link_pinterest'] . '">Pinterest</a> | ';
-            echo '<a href="' . $row['link_instagram'] . '">Instagram</a> | ';
-            echo '<a href="' . $row['link_youtube'] . '">YouTube</a>';
-            echo '</td>';
-            echo '<td>';
-            echo '<img src="../private/images_product/' . $row['imagen1'] . '" alt="Imagen 1" width="50">';
-            echo '<img src="../private/images_product/' . $row['imagen2'] . '" alt="Imagen 2" width="50">';
-            echo '<img src="../private/images_product/' . $row['imagen3'] . '" alt="Imagen 3" width="50">';
-            echo '</td>';
-            echo '<td>';
-            if ($row['destacado'] == 1) {
-                echo '<button class="btn btn-info" onclick="toggleDestacado(' . $row['id_product'] . ', false)">Quitar Destacado</button>';
-            } else {
-                echo '<button class="btn btn-warning" onclick="toggleDestacado(' . $row['id_product'] . ', true)">Destacar</button>';
-            }
-            echo ' | <a class="btn btn-success" href="editar_producto.php?id=' . $row['id_product'] . '">Editar</a> | <button class="btn btn-danger" onclick="eliminarProducto(' . $row['id_product'] . ')">Eliminar</button>';
-            echo '</td>';
-            echo '</tr>';
-        }
-
-        echo '</tbody>';
-        echo '</table>';
-        ?>
+                // Cerrar la conexión a la base de datos
+                mysqli_close($conn); // Cambiado de $conexion a $conn
+                ?>
+            </tbody>
+        </table>
     </div>
-
-    <script type='text/javascript'
-        src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../config/sidebar.js"></script>
-    <script type='text/javascript'>
+    <script type="text/javascript">
         function eliminarProducto(idProducto) {
             console.log('ID del producto a eliminar:', idProducto);
 
