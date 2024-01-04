@@ -55,11 +55,8 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
                     }
                     ?>
 				
-						<i class="fa-solid fa-basket-shopping"></i>
-						<div class="content-shopping-cart">
-							<span class="text">Carrito</span>
-							<span class="number">(0)</span>
-						</div>
+				
+				
 					</div>
 				</div>
 			</div>
@@ -162,16 +159,14 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
                         <span class="like-button" data-post-id="<?php echo $filaDestacado['id_product']; ?>">
                             <i class="fa-regular fa-heart"></i>
                         </span>
-                        <span>
-                            <i class="fa-solid fa-code-compare"></i>
-                        </span>
+                    
                     </div>
                 </div>
                 <div class="content-card-product">
                     <div class="separe"></div>
                     <a href="product.php?id=<?php echo $filaDestacado['id_product']; ?>" class="product-link"><?php echo $filaDestacado['nombre']; ?></a>
                     <span class="add-cart">
-                        <i class="fa-solid fa-basket-shopping"></i>
+                    <i class="fa-solid fa-wallet"></i>
                     </span>
                     <p class="price">$<?php echo $filaDestacado['precio']; ?></p>
                 </div>
@@ -292,7 +287,6 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
 		<script src="../config/navbar.js" ></script>
 		<script>
 $(document).ready(function() {
-    // Manejar clic en el botón "Me gusta" en productos destacados
     $('.like-button').each(function() {
         var postId = $(this).data('post-id');
         var likeButton = $(this);
@@ -318,9 +312,7 @@ $(document).ready(function() {
                         return;
                     }
 
-                    if (response.status === 'Like' || response.status === 'Unlike') {
-                        likeButton.toggleClass('liked', response.status === 'Like');
-                    }
+                    likeButton.toggleClass('liked', response.status === 'Like');
 
                     if (response.status === 'Like') {
                         setCookie("like_" + <?php echo isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0; ?> + "_" + postId, "1", + (86400 * 30), '/');

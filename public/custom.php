@@ -107,11 +107,7 @@ mysqli_close($conn);
                     ?>
 				
 				
-						<i class="fa-solid fa-basket-shopping"></i>
-						<div class="content-shopping-cart">
-							<span class="text">Carrito</span>
-							<span class="number">(0)</span>
-						</div>
+		
 					</div>
 				</div>
 			</div>

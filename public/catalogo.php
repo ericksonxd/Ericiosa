@@ -53,11 +53,7 @@ $resultado = mysqli_query($conn, $query);
 							}
 							?>
 						
-								<i class="fa-solid fa-basket-shopping"></i>
-								<div class="content-shopping-cart">
-									<span class="text">Carrito</span>
-									<span class="number">(0)</span>
-								</div>
+						
 							</div>
 						</div>
 					</div>
@@ -100,9 +96,7 @@ $resultado = mysqli_query($conn, $query);
 				<span class="like-button" data-post-id="<?php echo $fila['id_product']; ?>">
     <i class="fa-regular fa-heart"></i>
 </span>
-                <span>
-                    <i class="fa-solid fa-code-compare"></i>
-                </span>
+           
             </div>
         </div>
         <div class="content-card-product">
@@ -110,7 +104,7 @@ $resultado = mysqli_query($conn, $query);
             <!-- Enlace a la página de producto con el ID del producto -->
             <a href="product.php?id=<?php echo $fila['id_product']; ?>" class="product-link"><?php echo $fila['nombre']; ?></a>
             <span class="add-cart">
-                <i class="fa-solid fa-basket-shopping"></i>
+			<i class="fa-solid fa-wallet"></i>
             </span>
             <p class="price">$<?php echo $fila['precio']; ?></p>
         </div>
@@ -211,9 +205,7 @@ $resultado = mysqli_query($conn, $query);
 	<script defer nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 	<script>
 $(document).ready(function() {
-    // Manejar clic en el botón "Me gusta"
     $('.like-button').each(function() {
-        // Obtener el ID del producto desde el atributo data-post-id
         var postId = $(this).data('post-id');
         var likeButton = $(this);
 
@@ -226,19 +218,23 @@ $(document).ready(function() {
 
         // Configurar el evento de clic
         likeButton.click(function() {
+            // Aplicar la clase 'liked' y actualizar el color según el estado del like
+            likeButton.toggleClass('liked');
+            likeButton.find('i').css('color', likeButton.hasClass('liked') ? 'red' : 'black');
+
             // Realizar la solicitud AJAX
             $.ajax({
                 type: 'POST',
                 url: '../config/like_handler.php',
                 data: { like: postId },
-                dataType: 'json', // Esperar una respuesta JSON
+                dataType: 'json',
                 success: function(response) {
-                    // Actualizar la interfaz de usuario según la respuesta
                     console.log(response);
 
-                    if (response.status === 'Like' || response.status === 'Unlike') {
-                        // Alternar la clase 'liked' según la respuesta
-                        likeButton.toggleClass('liked', response.status === 'Like');
+                    if (response.alert) {
+                        alert(response.alert);
+                        window.location.href = response.redirect;
+                        return;
                     }
 
                     // Actualizar la cookie del like
@@ -247,18 +243,9 @@ $(document).ready(function() {
                     } else {
                         setCookie("like_" + <?php echo isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0; ?> + "_" + postId, "", - 3600, '/');
                     }
-
-                    // Manejar alerta y redirección si es necesario
-                    if (response.alert) {
-                        alert(response.alert);
-                    }
-                    if (response.redirect) {
-                        window.location.replace(response.redirect);
-                    }
                 },
                 error: function(xhr, status, error) {
-                    // Manejar errores generales
-                    console.log(error);
+                    console.error('Error al procesar la solicitud: ', error);
                 }
             });
         });

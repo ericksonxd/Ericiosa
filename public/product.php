@@ -92,6 +92,7 @@ function checkIfUserLikedProduct($userId, $productId)
     <script src="../config/cookies.js"></script>
     <title>Ericiosa - <?php echo $nombre_producto; ?></title>
     <link rel="stylesheet" href="../public/css/productstyle.css" />
+	<script src="https://www.paypal.com/sdk/js?client-id=AR5rBM_I9QVrutOwC4bktQbUhGA1HYxBHwikTnIrMkv0W2ZmzwHB4vFylCcSscWPhAu88NtTbzxF1ize"></script>
 </head>
 
 
@@ -126,11 +127,6 @@ function checkIfUserLikedProduct($userId, $productId)
 					}
 					?>
 
-					<i class="fa-solid fa-basket-shopping"></i>
-					<div class="content-shopping-cart">
-						<span class="text">Carrito</span>
-						<span class="number">(0)</span>
-					</div>
 				</div>
 
 			</div>
@@ -193,8 +189,72 @@ function checkIfUserLikedProduct($userId, $productId)
 </span>
     <span>$<?php echo $precio_producto; ?></span>
     <div class="options">
-        <a href="#">Comprar Ahora</a>
-        <a href="#">Añadir Al carrito</a>
+	<div id="paypal-button-container"></div>
+
+	<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Función para inicializar el botón de PayPal
+    function initializePayPal() {
+        paypal.Buttons({
+            style: {
+                color: 'blue',
+                shape: 'pill',
+                label: 'pay'
+            },
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '<?php echo $precio_producto; ?>',
+                            currency_code: 'USD'
+                        }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (details) {
+                    // Detalles del pago
+                    var paymentDetails = {
+                        orderID: data.orderID,
+                        payerID: data.payerID,
+                        details: details
+                    };
+
+                    // Llamada AJAX para enviar los detalles al servidor
+                    $.ajax({
+                        type: 'POST',
+                        url: '../config/guardar_pago.php',
+                        data: { paymentDetails: paymentDetails },
+                        success: function (response) {
+                            console.log(response);
+                        },
+                        error: function (error) {
+                            console.error('Error al enviar detalles de pago:', error);
+                        }
+                    });
+
+                    alert('Pago completado. Gracias por tu compra!');
+                });
+            },
+            onError: function (err) {
+                console.error('Error en el pago:', err);
+            }
+        }).render('#paypal-button-container');
+    }
+
+    // Asegurarse de que el SDK de PayPal esté cargado antes de inicializar
+    if (window.paypal) {
+        initializePayPal();
+    } else {
+        var script = document.createElement('script');
+        script.src = 'https://www.paypal.com/sdk/js?client-id=AR5rBM_I9QVrutOwC4bktQbUhGA1HYxBHwikTnIrMkv0W2ZmzwHB4vFylCcSscWPhAu88NtTbzxF1ize';
+        script.async = true;
+        script.onload = initializePayPal;
+        document.head.appendChild(script);
+    }
+	
+});
+</script>
     </div>
 </div>
 					<div class="description">
@@ -316,7 +376,6 @@ $(document).ready(function() {
     var likeButton = $('.like-button');
     var likesCount = $('.likes-count');
 
-    // Obtener el estado del like desde PHP
     var isLiked = <?php echo $isLiked ? 'true' : 'false'; ?>;
     
     // Aplicar la clase 'liked' y actualizar el color según el estado del like
@@ -324,6 +383,9 @@ $(document).ready(function() {
     likeButton.find('i').css('color', isLiked ? 'red' : 'black');
 
     likeButton.click(function() {
+        likeButton.toggleClass('liked');
+        likeButton.find('i').css('color', likeButton.hasClass('liked') ? 'red' : 'black');
+
         $.ajax({
             type: 'POST',
             url: '../config/like_handler.php',
@@ -338,15 +400,11 @@ $(document).ready(function() {
                     return;
                 }
 
-                if (response.status === 'Like' || response.status === 'Unlike') {
-                    // Alternar la clase 'liked' y actualizar el color según el estado del like
-                    likeButton.toggleClass('liked', response.status === 'Like');
-                    likeButton.find('i').css('color', response.status === 'Like' ? 'red' : 'black');
+                likeButton.toggleClass('liked', response.status === 'Like');
+                likeButton.find('i').css('color', response.status === 'Like' ? 'red' : 'black');
 
-                    // Actualizar el número de likes con el formato correcto
-                    likesCount.text('(' + response.likes_count + ')');
-					console.log('Número de likes actualizado:', response.likes_count);
-                }
+                likesCount.text('(' + response.likes_count + ')');
+                console.log('Número de likes actualizado:', response.likes_count);
 
                 if (response.status === 'Like') {
                     setCookie("like_" + <?php echo isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0; ?> + "_" + productId, "1", + (86400 * 30), '/');
@@ -363,6 +421,7 @@ $(document).ready(function() {
     // Otras funciones JavaScript si las tienes
 });
 </script>
+
 </body>
 
 </html>
