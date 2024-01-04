@@ -2,6 +2,14 @@
 session_start();
 require_once '../config/conexion.php';
 
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$usuario_id = $_SESSION['usuario_id'];
+
+
 $usuario_id = isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0;
 
 // Obtener información del usuario
