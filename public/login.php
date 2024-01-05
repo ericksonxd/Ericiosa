@@ -27,9 +27,6 @@
                         <input type="password" name="password" id="password" autocomplete="current-password" placeholder="Ingrese su contraseña" required>
                     </div>
                 </div>
-                <a href="forget_password.php" class="google" >Olvidaste tu contraseña?</a>
-                <br>
-                <br>
                 <div class="button">
                     <input type="submit" name="login" value="Inicia Sesion">
                 </div>
@@ -40,7 +37,6 @@
                     <span>Ingresa con Google</span>
                 </a>
             </div>
-     
         </div>
     </div>
     
