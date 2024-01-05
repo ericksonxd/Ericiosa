@@ -2,6 +2,7 @@
 session_start();
 include "../config/conexion.php";
 require '../vendor/autoload.php'; // Incluye el autoloader de Composer
+include "../config/credentials.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -34,15 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                      //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'erick.pereira6677@gmail.com';         //SMTP username
-            $mail->Password   = 'ozzh nsht zngo qyjk';                         //SMTP password
+			$mail->Host       = $config['smtp_host'];
+			$mail->SMTPAuth   = true;
+			$mail->Username   = $config['smtp_username'];
+			$mail->Password   = $config['smtp_password'];                  //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;        //Enable implicit TLS encryption
             $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('erick.pereira6677@gmail.com', 'Ericiosa');
+            $mail->setFrom($config['smtp_username'], 'Ericiosa');
             $mail->addAddress('erick.pereira6677@gmail.com', 'Usuario Temporal');     // Cambia a tu correo temporal
             $mail->addReplyTo('info@example.com', 'Information');
 

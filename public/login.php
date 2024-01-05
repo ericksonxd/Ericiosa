@@ -6,12 +6,16 @@
         <link rel="stylesheet" href="css/loginstyle.css">
         <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
       </head>
     <body>
     <div class="container">
         <div class="nav">
             <a class="return-btn" href="index.php">Pagina Principal</a>
+ 
             <a class="login-btn" href="register.php">Registrate</a>
+         
+      
         </div>
         <hr>
         <div class="title">Inicia Sesión en Ericiosa</div>
@@ -19,6 +23,32 @@
             <form action="login.php" method="POST">
                 <div class="user-details">
                     <div class="input-box">
+
+                    <?php 
+    if(isset($_GET['message'])){
+     
+    ?>
+      <div class="alert" role="alert">
+        <?php 
+        switch ($_GET['message']) {
+          case 'ok':
+            echo 'Por favor, revisa tu correo';
+            break;
+          case 'success_password':
+            echo 'Inicia sesión con tu nueva contraseña';
+            break;
+            
+          default:
+            echo 'Algo salió mal, intenta de nuevo';
+            break;
+        }
+        ?>
+      </div>
+      <br>
+    <?php
+    }
+    ?>
+
                         <span class="details"><ion-icon name="mail-outline"></ion-icon> Correo electrónico</span>
                         <input type="email" name="email" id="email" autocomplete="email" placeholder="Ingrese su correo electrónico" required>
                     </div>
@@ -27,16 +57,27 @@
                         <input type="password" name="password" id="password" autocomplete="current-password" placeholder="Ingrese su contraseña" required>
                     </div>
                 </div>
+               <a href="forget_password.php" class="google" >Olvidaste tu contraseña?</a> 
+               <br>
+               <br>
+
                 <div class="button">
                     <input type="submit" name="login" value="Inicia Sesion">
                 </div>
             </form>
+
+
+
+
             <div class="media-options">
                 <a href="#" class="field google">
                     <img src="./css/images/google.png" alt="" class="google-img">
                     <span>Ingresa con Google</span>
                 </a>
             </div>
+
+
+
         </div>
     </div>
     
@@ -61,7 +102,7 @@ if (isset($_POST['login'])) {
             $_SESSION['usuario'] = $row['nombre'];
             header("Location: index.php");
         } else {
-            echo '<script>alert("Contraseña incorrecta")</script>';
+            echo '<script>alert("Contra-seña incorrecta")</script>';
         }
     } else {
         echo '<script>alert("Usuario no encontrado")</script>';
