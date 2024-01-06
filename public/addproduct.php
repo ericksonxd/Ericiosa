@@ -41,75 +41,75 @@ mysqli_close($conn);
    <div class="container">  
    
 <center>
-            <h1>  Nuevo producto  </h1>
+<h1>Nuevo producto</h1>
         </center>
-   
-  
-<br>
-<form action="../config/insert.php" method="POST" enctype="multipart/form-data" onsubmit="return validarFormulario()">
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Nombre del Producto</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" name="nombre">
-   
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">descripcion del producto</label>
-    <input type="text" class="form-control" name="descripcion">
-<br>  
-    <label for="exampleInputPassword1" class="form-label">Precio del Producto</label>
-    <input type="number" class="form-control" name="precio">
-<br>
-<label for="exampleInputPassword1" class="form-label">Enlace de Twitter</label>
-    <input type="text" class="form-control" name="link_twitter">
-<br>
-<label for="exampleInputPassword1" class="form-label">Enlace de Pinterest</label>
-    <input type="text" class="form-control" name="link_pinterest">
-    <br>
-<label for="exampleInputPassword1" class="form-label">Enlace de Instagram</label>
-    <input type="text" class="form-control" name="link_instagram">  
+        <br>
+        <form action="../config/insert.php" method="POST" enctype="multipart/form-data" onsubmit="return validarFormulario()">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombre del Producto</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" name="nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Descripción del producto (al menos 15 caracteres)</label>
+                <input type="text" class="form-control" name="descripcion" minlength="15" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Precio del Producto</label>
+                <input type="number" class="form-control" name="precio">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Enlace de Twitter</label>
+                <input type="text" class="form-control" name="link_twitter" value="https://twitter.com/ericiosa?lang=es">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Enlace de Pinterest</label>
+                <input type="text" class="form-control" name="link_pinterest" value="https://www.pinterest.com/ericiosa/">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Enlace de Instagram</label>
+                <input type="text" class="form-control" name="link_instagram" value="https://www.instagram.com/ericiosa/?hl=es">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Enlace de Youtube</label>
+                <input type="text" class="form-control" name="link_youtube" value="https://www.youtube.com/channel/UC8qlHJRf2-TgMw99GjoJQrg">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Primera Imagen</label>
+                <input type="file" class="form-control" name="imagen1" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Segunda Imagen</label>
+                <input type="file" class="form-control" name="imagen2" required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Tercera Imagen</label>
+                <input type="file" class="form-control" name="imagen3" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Subir Producto</button>
+            <a href="./dashboard.php" class="btn btn-success">Regresar al dashboard</a>
+        </form>
+    </div>
 
-    <br>
-<label for="exampleInputPassword1" class="form-label">Enlace de Youtube</label>
-    <input type="text" class="form-control" name="link_youtube"> 
-  </div>
-    <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Primera Imagen</label>
-    <input type="file" class="form-control" name="imagen1">
-<br>
-    <label for="exampleInputPassword1" class="form-label">Segunda Imagen</label>
-    <input type="file" class="form-control" name="imagen2">
-<br>
-    <label for="exampleInputPassword1" class="form-label">Tercera Imagen</label>
-    <input type="file" class="form-control" name="imagen3">
-  </div>
-  
-    <button type="submit" class="btn btn-primary">Subir Producto</button>
-<a href="./dashboard.php"  class="btn btn-success"> regresar al dashboard <a>
-<br>
-<br>
-   </div>
- 
-   </div>
-
-
-   <script>
+    <script>
         function validarFormulario() {
-            
-            var nombre = document.getElementsByName('nombre')[0].value.trim();
-            var descripcion = document.getElementsByName('descripcion')[0].value.trim();
-            var imagen = document.getElementsByName('imagen')[0].value.trim();
-
-            
-            if (nombre === '' ||  descripcion=== '' || imagen === '') {
-                alert('Por favor, complete todos los campos.');
-                return false; 
+            // Validación adicional, por ejemplo, para los enlaces
+            var enlaces = ['link_twitter', 'link_youtube', 'link_pinterest', 'link_instagram'];
+            for (var i = 0; i < enlaces.length; i++) {
+                var enlace = document.getElementsByName(enlaces[i])[0].value.trim();
+                // Validar si el enlace es válido (puedes agregar lógica adicional)
+                if (enlace !== '' && !isValidURL(enlace)) {
+                    alert('Por favor, ingrese un enlace válido para ' + enlaces[i] + '.');
+                    return false;
+                }
             }
-            return true; 
+            return true;
+        }
+
+        function isValidURL(url) {
+            // Lógica para validar URL (puedes usar expresiones regulares u otros métodos)
+            // En este ejemplo, simplemente verifica si comienza con 'http://' o 'https://'
+            return url.startsWith('http://') || url.startsWith('https://');
         }
     </script>
-
- 
- 
-</form>
-  </body>
+</body>
 </html>
