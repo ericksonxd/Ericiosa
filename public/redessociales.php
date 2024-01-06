@@ -9,6 +9,7 @@ session_start();
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>Ericiosa - Redes Sociales</title>
 		<link rel="stylesheet" href="../public/css/redesstyle.css" />
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	</head>
 	<body>
     <header>
@@ -106,8 +107,7 @@ session_start();
 
 
 
-
-        <footer class="footer">
+<footer class="footer">
 			<div class="container container-footer">
 				<div class="menu-footer">
 					<div class="contact-info">
@@ -121,20 +121,20 @@ session_start();
 						</ul>
 						<div class="social-icons">
 							  <span class="facebook">
-							  <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+							  <a href="https://twitter.com/ericiosa?lang=es"><i class="fa-brands fa-x-twitter"></i></a>
 							</span>
 
 							<span class="youtube">
 
-							<a href=""><i class="fa-brands fa-youtube"></i></a>
+							<a href="https://www.youtube.com/channel/UC8qlHJRf2-TgMw99GjoJQrg"><i class="fa-brands fa-youtube"></i></a>
 				
 							</span>
 							<span class="pinterest">
-							<a href=""><i class="fa-brands fa-pinterest-p"></i></a>
+							<a href="https://www.pinterest.com/ericiosa/"><i class="fa-brands fa-pinterest-p"></i></a>
 								
 							</span>
 							<span class="instagram">
-								<a href=""><i class="fa-brands fa-instagram"></i></a>
+								<a href="https://www.instagram.com/ericiosa/?hl=es"><i class="fa-brands fa-instagram"></i></a>
 				
 							</span>
 						</div>
@@ -143,8 +143,7 @@ session_start();
 					<div class="information">
 						<p class="title-footer">Información</p>
 						<ul>
-							<li><a href="#">Acerca de Nosotros</a></li>
-							<li><a href="#">Términos y condiciones</a></li>
+							<li><a href="index.php">Acerca de Nosotros</a></li>
 							<li><a href="#">Contactános</a></li>
 						</ul>
 					</div>
@@ -153,8 +152,8 @@ session_start();
 						<p class="title-footer">Mi cuenta</p>
 
 						<ul>
-							<li><a href="#">Mi cuenta</a></li>
-							<li><a href="#">Lista de deseos</a></li>
+							<li><a href="perfil.php">Mi cuenta</a></li>
+							<li><a href="perfil.php">Favoritos</a></li>
 						</ul>
 					</div>
 
@@ -165,10 +164,11 @@ session_start();
 							<p>
 							Suscribete a nuestra campaña de correos para recibir catalogos exclusivos
 							</p>
-							<form action="">
-							<input type="email" placeholder="Ingresa el correo aquí...">
-<button type="submit" >suscribete</button>
-							</form>
+							<form action="../config/campaign_sender.php" method="POST" id="subscribe-form">
+    <input type="hidden" name="current_url" id="current-url">
+    <input type="email" placeholder="Ingresa el correo aquí..." name="email">
+    <button type="submit">Suscribirse</button>
+</form>
 							
 						</div>
 					</div>
@@ -182,13 +182,26 @@ session_start();
 				</div>
 			</div>
 		</footer>
-
 		<script
 		
 			src="https://kit.fontawesome.com/81581fb069.js"
 			crossorigin="anonymous"
 		></script>
 		<script src="../config/navbar.js" ></script>
-        
+		<script>
+    $(document).ready(function() {
+        // Agrega un listener para actualizar la URL actual antes de enviar el formulario
+        $('#subscribe-form').submit(function() {
+            // Obtén la URL actual
+            var currentUrl = window.location.href;
+            
+            // Actualiza el valor del campo oculto
+            $('#current-url').val(currentUrl);
+        });
+    });
+
+    // Resto de tu script JavaScript existente...
+
+</script>
 	</body>
 </html>

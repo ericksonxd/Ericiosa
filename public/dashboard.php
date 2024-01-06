@@ -24,6 +24,63 @@ if (!$result) {
     $admin_nombre = $admin_data['nombre'] ?? ''; // Initialize $admin_nombre with an empty string if not set
 }
 
+
+function obtenerNumeroProductosCatalogo()
+{
+    include "../config/conexion.php";
+    $query = "SELECT COUNT(*) AS total FROM products";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
+    } else {
+        return 0; // Manejo de errores
+    }
+}
+
+function obtenerNumeroUsuariosIngresados()
+{
+    include "../config/conexion.php";
+    $query = "SELECT COUNT(*) AS total FROM usuarios";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
+    } else {
+        return 0; // Manejo de errores
+    }
+}
+
+function obtenerNumeroPagosRegistrados()
+{
+    include "../config/conexion.php";
+    $query = "SELECT COUNT(*) AS total FROM pagos";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
+    } else {
+        return 0; // Manejo de errores
+    }
+}
+
+function obtenerNumeroPedidosPersonalizados()
+{
+    include "../config/conexion.php";
+    $query = "SELECT COUNT(*) AS total FROM custom_orders";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'];
+    } else {
+        return 0; // Manejo de errores
+    }
+}
+
 // Close the database connection
 mysqli_close($conn);
 ?>
@@ -64,9 +121,10 @@ mysqli_close($conn);
                                 href="adminusers.php" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
                                     class="nav_name">Usuarios</span> </a> <a href="adminproduct.php" class="nav_link">
                                 <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Productos</span> </a> <a
-                                href="adminstats.php" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
-                                    class="nav_name">Stats</span> </a>
-                                    <a href="adminmail.php" class="nav_link"><i class='bx bx-envelope'></i><span class="nav_name">Mails</span> </a>
+                                href="adminstats.php" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
+                                <span class="nav_name">Stats</span> </a>
+                            <a href="adminmail.php" class="nav_link"><i class='bx bx-envelope'></i><span
+                                    class="nav_name">Mails</span> </a>
                         </div>
                     </div> <a href="../config/logout.php" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
                             class="nav_name">Cerrar Sesion</span> </a>
@@ -74,8 +132,75 @@ mysqli_close($conn);
             </div>
             <!--Container Main start-->
             <div class="height-100 bg-light">
-                <h4>Main Components</h4>
+                <h1>Bienvinid@ Al dashboard</h1>
+                <div class="height-100 bg-light">
 
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card bg-info text-white mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="adminproduct.php" class="text-decoration-none text-reset">
+                                            Número de Productos añadidos al catálogo:
+                                        </a>
+                                    </h5>
+                                    <p class="card-text">
+                                        <?php echo obtenerNumeroProductosCatalogo(); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card bg-success text-white mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="adminusers.php" class="text-decoration-none text-reset">
+                                            Número de Usuarios ingresados:
+                                        </a>
+                                    </h5>
+                                    <p class="card-text">
+                                        <?php echo obtenerNumeroUsuariosIngresados(); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card bg-warning text-white mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="adminstats.php" class="text-decoration-none text-reset">
+                                            <!-- Ajusta aquí la ruta del enlace -->
+                                            Número de Pagos Registrados:
+                                        </a>
+                                    </h5>
+                                    <p class="card-text">
+                                        <?php echo obtenerNumeroPagosRegistrados(); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card bg-danger text-white mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="adminmail.php" class="text-decoration-none text-reset">
+                                            <!-- Ajusta aquí la ruta del enlace -->
+                                            Número de Pedidos Personalizados:
+                                        </a>
+                                    </h5>
+                                    <p class="card-text">
+                                        <?php echo obtenerNumeroPedidosPersonalizados(); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
 
 
 
@@ -94,6 +219,6 @@ mysqli_close($conn);
                 myLink.addEventListener('click', function (e) {
                     e.preventDefault();
                 });
-                            
-                                </body >
-                            </html >
+                </script>     
+     </body >
+ </html >

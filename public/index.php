@@ -3,6 +3,7 @@
 session_start();
 include '../config/conexion.php';
 
+
 $queryDestacados = "SELECT p.id_product, p.nombre, p.precio, p.imagen1, COUNT(l.id_like) as likes_count 
                    FROM products p 
                    LEFT JOIN likes l ON p.id_product = l.id_product
@@ -11,6 +12,10 @@ $queryDestacados = "SELECT p.id_product, p.nombre, p.precio, p.imagen1, COUNT(l.
                    LIMIT 4";
 
 $resultadoDestacados = mysqli_query($conn, $queryDestacados);
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -218,20 +223,20 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
 						</ul>
 						<div class="social-icons">
 							  <span class="facebook">
-							  <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+							  <a href="https://twitter.com/ericiosa?lang=es"><i class="fa-brands fa-x-twitter"></i></a>
 							</span>
 
 							<span class="youtube">
 
-							<a href=""><i class="fa-brands fa-youtube"></i></a>
+							<a href="https://www.youtube.com/channel/UC8qlHJRf2-TgMw99GjoJQrg"><i class="fa-brands fa-youtube"></i></a>
 				
 							</span>
 							<span class="pinterest">
-							<a href=""><i class="fa-brands fa-pinterest-p"></i></a>
+							<a href="https://www.pinterest.com/ericiosa/"><i class="fa-brands fa-pinterest-p"></i></a>
 								
 							</span>
 							<span class="instagram">
-								<a href=""><i class="fa-brands fa-instagram"></i></a>
+								<a href="https://www.instagram.com/ericiosa/?hl=es"><i class="fa-brands fa-instagram"></i></a>
 				
 							</span>
 						</div>
@@ -240,8 +245,7 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
 					<div class="information">
 						<p class="title-footer">Información</p>
 						<ul>
-							<li><a href="#">Acerca de Nosotros</a></li>
-							<li><a href="#">Términos y condiciones</a></li>
+							<li><a href="index.php">Acerca de Nosotros</a></li>
 							<li><a href="#">Contactános</a></li>
 						</ul>
 					</div>
@@ -250,8 +254,8 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
 						<p class="title-footer">Mi cuenta</p>
 
 						<ul>
-							<li><a href="#">Mi cuenta</a></li>
-							<li><a href="#">Lista de deseos</a></li>
+							<li><a href="perfil.php">Mi cuenta</a></li>
+							<li><a href="perfil.php">Favoritos</a></li>
 						</ul>
 					</div>
 
@@ -262,10 +266,12 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
 							<p>
 							Suscribete a nuestra campaña de correos para recibir catalogos exclusivos
 							</p>
-							<form action="">
-							<input type="email" placeholder="Ingresa el correo aquí...">
-<button type="submit" >suscribete</button>
-							</form>
+		
+<form action="../config/campaign_sender.php" method="POST" id="subscribe-form">
+    <input type="hidden" name="current_url" id="current-url">
+    <input type="email" placeholder="Ingresa el correo aquí..." name="email">
+    <button type="submit">Suscribirse</button>
+</form>
 							
 						</div>
 					</div>
@@ -287,6 +293,21 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
 		></script>
 
 		<script src="../config/navbar.js" ></script>
+		<script>
+    $(document).ready(function() {
+        // Agrega un listener para actualizar la URL actual antes de enviar el formulario
+        $('#subscribe-form').submit(function() {
+            // Obtén la URL actual
+            var currentUrl = window.location.href;
+            
+            // Actualiza el valor del campo oculto
+            $('#current-url').val(currentUrl);
+        });
+    });
+
+    // Resto de tu script JavaScript existente...
+
+</script>
 		<script>
 $(document).ready(function() {
     $('.like-button').each(function() {
