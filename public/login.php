@@ -67,13 +67,6 @@
             </form>
 
 
-
-
-            <div class="media-options">
-                <a href="#" class="field google">
-                    <img src="./css/images/google.png" alt="" class="google-img">
-                    <span>Ingresa con Google</span>
-                </a>
             </div>
 
 

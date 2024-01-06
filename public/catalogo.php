@@ -104,7 +104,9 @@ $resultado = mysqli_query($conn, $query);
             <!-- Enlace a la página de producto con el ID del producto -->
             <a href="product.php?id=<?php echo $fila['id_product']; ?>" class="product-link"><?php echo $fila['nombre']; ?></a>
             <span class="add-cart">
-			<i class="fa-solid fa-wallet"></i>
+			<a class="ws" href="product.php?id=<?php echo $fila['id_product']; ?>" class="add-cart">
+            <i class="fa-solid fa-wallet"></i> <!-- Este es el icono de cartera -->
+        </a>
             </span>
             <p class="price">$<?php echo $fila['precio']; ?></p>
         </div>

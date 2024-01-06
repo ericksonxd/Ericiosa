@@ -166,7 +166,9 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
                     <div class="separe"></div>
                     <a href="product.php?id=<?php echo $filaDestacado['id_product']; ?>" class="product-link"><?php echo $filaDestacado['nombre']; ?></a>
                     <span class="add-cart">
-                    <i class="fa-solid fa-wallet"></i>
+					<a class="ws"  href="product.php?id=<?php echo $filaDestacado['id_product']; ?>" class="add-cart">
+                    <i class="fa-solid fa-wallet"></i> <!-- Este es el icono de cartera -->
+                </a>
                     </span>
                     <p class="price">$<?php echo $filaDestacado['precio']; ?></p>
                 </div>

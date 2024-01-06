@@ -21,8 +21,20 @@ if ($newPassword !== $authNewPassword) {
 // Hash de la nueva contraseña
 $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
-$query = "UPDATE usuarios SET password = '$hashedPassword', status = 0 WHERE id = $id";
-$conn->query($query);
+// Actualizar la contraseña y establecer el estado en 0
+$query = "UPDATE usuarios SET password = ?, status = 0 WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('si', $hashedPassword, $id);
 
-header("Location: ../public/login.php?message=success_password");
+if ($stmt->execute()) {
+    echo '<script>';
+    echo 'alert("Contraseña Actualizada Correctamente");';
+    echo 'window.location.href="../public/login.php?message=success_password";';
+    echo '</script>';
+} else {
+    showAlert('<script>alert("Error al Actualizar Contraseña: ' . $stmt->error . '");</script>');
+}
+
+$stmt->close();
+$conn->close();
 ?>
