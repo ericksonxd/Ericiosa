@@ -11,6 +11,7 @@ session_start();
 	<title>Ericiosa - Home</title>
 	<link rel="stylesheet" href="../public/css/cursosstyle.css" />
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<link rel="icon" type="image/png" href="../private/logos/logo 7.png">
 </head>
 
 <body>
@@ -27,7 +28,7 @@ session_start();
 
 				<div class="container-logo">
 
-					<h1 class="logo"><a href="#">Ericiosa</a></h1>
+				<h1 class="logo"><a href="index.php"><img  class="logo-img" src="../private/logos/logo 9.png" alt=""></a></h1>
 				</div>
 
 				<div class="container-user">

@@ -74,6 +74,16 @@ background-color: var(--background-color);
 	gap: 0.5rem;
 }
 
+
+
+img.logo-img{
+
+	height: 6rem;
+	width: 25rem;
+	object-fit: cover;
+	
+	 }
+
 .container-logo i {
 	font-size: 1rem;
 }

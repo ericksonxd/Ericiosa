@@ -1243,3 +1243,12 @@ text-decoration: none;
 	.box {
 	  width: 100%;
 	}  }
+
+	
+	img.logo-img{
+
+		height: 6rem;
+		width: 25rem;
+		object-fit: cover;
+		
+		 }

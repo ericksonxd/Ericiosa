@@ -54,6 +54,15 @@ html {
 
 }
 
+
+img.logo-img{
+
+	height: 6rem;
+	width: 25rem;
+	object-fit: cover;
+	
+	 }
+
 .customer-support i {
 	font-size: 3.3rem;
 }

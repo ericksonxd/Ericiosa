@@ -9,6 +9,7 @@ session_start();
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>Ericiosa - Redes Sociales</title>
 		<link rel="stylesheet" href="../public/css/redesstyle.css" />
+		<link rel="icon" type="image/png" href="../private/logos/logo 7.png">
 		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	</head>
 	<body>
@@ -25,7 +26,7 @@ session_start();
 
 					<div class="container-logo">
 					
-						<h1 class="logo"><a href="#">Ericiosa</a></h1>
+						<h1 class="logo"><a href="index.php"><img  class="logo-img" src="../private/logos/logo 9.png" alt=""></a></h1>
 					</div>
 
 					<div class="container-user">

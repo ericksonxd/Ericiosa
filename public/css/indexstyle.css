@@ -1115,3 +1115,11 @@ a.product-link {
 	   background-color: #000;
 	}
  }
+
+ img.logo-img{
+
+height: 6rem;
+width: 25rem;
+object-fit: cover;
+
+ }

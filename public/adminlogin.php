@@ -51,6 +51,7 @@ mysqli_close($conn);
     <link rel="stylesheet" href="css/loginstyle.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../private/logos/logoadmin.png">
 </head>
 <body>
     <div class="container">

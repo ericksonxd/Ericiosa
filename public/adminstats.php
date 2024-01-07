@@ -39,6 +39,7 @@ $result = mysqli_query($conn, $query);
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../public/css/adminstyle.css">
+    <link rel="icon" type="image/png" href="../private/logos/logoadmin.png">
 </head>
 
 <body id="body-pd">

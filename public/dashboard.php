@@ -95,6 +95,7 @@ mysqli_close($conn);
     <link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <link rel="stylesheet" href="../public/css/adminstyle.css">
+    <link rel="icon" type="image/png" href="../private/logos/logoadmin.png">
 </head>
 
 <body>

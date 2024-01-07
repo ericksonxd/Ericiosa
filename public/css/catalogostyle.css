@@ -513,6 +513,16 @@ transition:0.3s ;
 	transition: all 0.4s ease;
 }
 
+
+img.logo-img{
+
+	height: 6rem;
+	width: 25rem;
+	object-fit: cover;
+	
+	 }
+
+
 .button-group span:hover {
 	background-color: var(--primary-color);
 }

@@ -25,8 +25,10 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>Ericiosa - Home</title>
 		<link rel="stylesheet" href="../public/css/indexstyle.css" />
+		<link rel="icon" type="image/png" href="../private/logos/logo 7.png">
 		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script src="../config/cookies.js" ></script>
+			<script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
 	</head>
 	<body>
 		<header>
@@ -42,7 +44,7 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
 
 					<div class="container-logo">
 					
-						<h1 class="logo"><a href="#">Ericiosa</a></h1>
+						<h1 class="logo"><a href="index.php"><img  class="logo-img" src="../private/logos/logo 9.png" alt=""></a></h1>
 					</div>
 
 					<div class="container-user">
@@ -192,7 +194,7 @@ $resultadoDestacados = mysqli_query($conn, $queryDestacados);
 					alt="Gallery Img2"
 					class="gallery-img-2"
 				/><img
-					src="../public/css/images/banner2.jpg"
+					src="../private/logos/banner.png"
 					alt="Gallery Img3"
 					class="banner2"
 				/><img
@@ -372,6 +374,7 @@ function setCookie(name, value, seconds, path) {
 }
 </script>
 
-		
+
+<script src="../config/parallax.js" ></script>
 	</body>
 </html>

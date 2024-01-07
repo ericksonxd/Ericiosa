@@ -75,6 +75,7 @@ mysqli_close($conn);
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>Ericiosa - Custom Order</title>
 		<link rel="stylesheet" href="../public/css/customstyle.css"/>
+		<link rel="icon" type="image/png" href="../private/logos/logo 7.png">
 		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	</head>
 	<body>
@@ -91,7 +92,7 @@ mysqli_close($conn);
 
 					<div class="container-logo">
 					
-						<h1 class="logo"><a href="#">Ericiosa</a></h1>
+						<h1 class="logo"><a href="index.php"><img  class="logo-img" src="../private/logos/logo 9.png" alt=""></a></h1>
 					</div>
 
 					<div class="container-user">

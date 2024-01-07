@@ -42,6 +42,7 @@ $productos_favoritos = mysqli_fetch_all($resultProductosFavoritos, MYSQLI_ASSOC)
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Ericiosa - Mi perfil</title>
 	<link rel="stylesheet" href="../public/css/profilestyle.css" />
+	<link rel="icon" type="image/png" href="../private/logos/logo 7.png">
 </head>
 
 <body>
@@ -58,7 +59,7 @@ $productos_favoritos = mysqli_fetch_all($resultProductosFavoritos, MYSQLI_ASSOC)
 
 				<div class="container-logo">
 
-					<h1 class="logo"><a href="#">Ericiosa</a></h1>
+					<h1 class="logo"><a href="index.php"><img  class="logo-img" src="../private/logos/logo 9.png" alt=""></a></h1>
 				</div>
 
 				<div class="container-user">
