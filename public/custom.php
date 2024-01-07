@@ -13,60 +13,62 @@ if (!$conn) {
     die("Conexión fallida: " . mysqli_connect_error());
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Procesar el formulario de pedido personalizado
-    $user_name = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : (isset($_POST['user_name']) ? $_POST['user_name'] : '');
-    $user_email = isset($_SESSION['usuario_email']) ? $_SESSION['usuario_email'] : (isset($_POST['user_email']) ? $_POST['user_email'] : '');
-    $event_date = isset($_POST['event_date']) ? $_POST['event_date'] : '';
-    $contact_number = isset($_POST['contact_number']) ? $_POST['contact_number'] : '';
-    $address = isset($_POST['address']) ? $_POST['address'] : '';
-    $order_details = isset($_POST['order_details']) ? $_POST['order_details'] : '';
+// Configuración de PHPMailer
+$mail = new PHPMailer(true);
+$errors = [];
 
-    // Insertar el pedido en la base de datos
-    $sql = "INSERT INTO custom_orders (user_name, user_email, event_date, contact_number, address, order_details)
-            VALUES ('$user_name', '$user_email', '$event_date', '$contact_number', '$address', '$order_details')";
+try {
+    // Server settings
+    $mail->SMTPDebug = SMTP::DEBUG_OFF;                      // Enable verbose debug output
+    $mail->isSMTP();                                         // Send using SMTP
+    $mail->Host       = $config['smtp_host'];
+    $mail->SMTPAuth   = true;
+    $mail->Username   = $config['smtp_username'];
+    $mail->Password   = $config['smtp_password'];            // SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;       // Enable implicit TLS encryption
+    $mail->Port       = 587;                                 // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    if (mysqli_query($conn, $sql)) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Procesar el formulario de pedido personalizado
+        $user_name = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : (isset($_POST['user_name']) ? $_POST['user_name'] : '');
+        $user_email = isset($_SESSION['usuario_email']) ? $_SESSION['usuario_email'] : (isset($_POST['user_email']) ? $_POST['user_email'] : '');
+        $event_date = isset($_POST['event_date']) ? $_POST['event_date'] : '';
+        $contact_number = isset($_POST['contact_number']) ? $_POST['contact_number'] : '';
+        $address = isset($_POST['address']) ? $_POST['address'] : '';
+        $order_details = isset($_POST['order_details']) ? $_POST['order_details'] : '';
 
+        // Validación del número de teléfono
+        if (!preg_match('/^\+\d{1,3}\d+$/', $contact_number)) {
+            $errors[] = "Formato de número de teléfono inválido. Debe ser +código de área + número de teléfono";
+        }
 
-        // Configuración de PHPMailer
-        $mail = new PHPMailer(true);
-        try {
-            //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
-			$mail->Host       = $config['smtp_host'];
-			$mail->SMTPAuth   = true;
-			$mail->Username   = $config['smtp_username'];
-			$mail->Password   = $config['smtp_password'];                  //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;        //Enable implicit TLS encryption
-            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        // Validación de otros campos
+        if (empty($user_name) || empty($user_email) || empty($event_date) || empty($contact_number) || empty($address) || empty($order_details)) {
+            $errors[] = "Todos los campos son obligatorios";
+        }
 
-            //Recipients
-            $mail->setFrom($config['smtp_username'], 'Ericiosa');
-            $mail->addAddress('erick.pereira6677@gmail.com', 'Usuario Temporal');     // Cambia a tu correo temporal
-            $mail->addReplyTo('info@example.com', 'Information');
+        if (empty($errors)) {
+            // Configuración del correo
+            $mail->setFrom($config['smtp_username'], $user_name);
+            $mail->addAddress($config['smtp_username'], 'Ericiosa');
 
             // Contenido del correo
             $mail->isHTML(true);
-            $mail->Subject = 'Pedido personalizado de ' . $user_name . ' - Ericiosa';
-            $mail->Body = "Nombre: $user_name <br> Correo: $user_email <br> Fecha del evento: $event_date <br> Teléfono: $contact_number <br> Dirección: $address <br> Detalles: $order_details";
+			$mail->Subject = 'Pedido personalizado de ' . $user_name . ' - Ericiosa';
+			$mail->Body    = "Nombre: $user_name <br> Correo: $user_email <br> Fecha del evento: $event_date <br> Teléfono: $contact_number <br> Dirección: $address <br> Detalles: $order_details";
+            // Envío del correo
+            $mail->send();
 
-            // Enviar el correo
-			$mail->send();
-            
-            // Alerta en JavaScript
             echo '<script>alert("Correo enviado correctamente");</script>';
-        } catch (Exception $e) {
-            echo '<script>alert("Error al enviar el correo: ' . $mail->ErrorInfo . '");</script>';
         }
-    } else {
-        echo '<script>alert("Error al enviar el pedido: ' . mysqli_error($conn) . '");</script>';
     }
+} catch (Exception $e) {
+    $errors[] = 'Error en el envío del formulario: ' . $e->getMessage();
 }
-
 mysqli_close($conn);
 ?>
+
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -151,20 +153,19 @@ mysqli_close($conn);
     <form action="" method="POST">
         <div class="form-body">
             <i class="fa-regular fa-user"></i>
-            <input type="text" name="user_name" placeholder="Nombre Completo">
-            <i class="fa-regular fa-envelope"></i>
-            <input type="email" name="user_email" placeholder="Ingresa tu correo electrónico">
-            <i class="fa-regular fa-calendar-days"></i><span>Fecha del evento</span>
-            <input type="date" name="event_date">
-            <i class="fa-brands fa-whatsapp"></i>
-            <input type="number" name="contact_number" placeholder="Ingresa tu número de contacto">
-            <i class="fa-solid fa-location-dot"></i>
-            <input type="text" name="address" placeholder="Ingresa tu Dirección">
-            <i class="fa-solid fa-circle-info"></i>
-            <span>Detalles de la orden</span>
-            <br>
-            <textarea name="order_details" id="description" cols="30" rows="10" minlength="20" maxlength="569" required placeholder="Ingresa una breve descripción del producto..."></textarea>
-            <br>
+			<input type="text" name="user_name" placeholder="Nombre Completo" value="<?php echo isset($_POST['user_name']) ? htmlspecialchars($_POST['user_name']) : ''; ?>">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" name="user_email" placeholder="Ingresa tu correo electrónico" value="<?php echo isset($_POST['user_email']) ? htmlspecialchars($_POST['user_email']) : ''; ?>">
+                            <i class="fa-regular fa-calendar-days"></i><span>Fecha del evento</span>
+                            <input type="date" name="event_date" value="<?php echo isset($_POST['event_date']) ? $_POST['event_date'] : ''; ?>">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <input type="text" name="contact_number" placeholder="Ingresa tu número de contacto" value="<?php echo isset($_POST['contact_number']) ? $_POST['contact_number'] : ''; ?>">
+                            <input type="text" name="address" placeholder="Ingresa tu Dirección" value="<?php echo isset($_POST['address']) ? $_POST['address'] : ''; ?>">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>Detalles de la orden</span>
+                            <br>
+                            <textarea name="order_details" id="description" cols="30" rows="10" minlength="20" maxlength="569" required placeholder="Ingresa una breve descripción del producto..."><?php echo isset($_POST['order_details']) ? htmlspecialchars($_POST['order_details']) : ''; ?></textarea>
+                            <br>
             <input type="submit" class="send" value="Enviar Orden">
         </div>
     </form>
@@ -279,7 +280,18 @@ mysqli_close($conn);
         });
     });
 
-    // Resto de tu script JavaScript existente...
+    
+	$(document).ready(function() {
+                // Pasar los errores al script JavaScript para mostrar alertas y mensajes en la parte inferior
+                <?php if (!empty($errors)): ?>
+                    var errors = <?php echo json_encode($errors); ?>;
+                    for (var i = 0; i < errors.length; i++) {
+                        alert(errors[i]);
+                    }
+                    $(".form-body").prepend("<div class=\"error-message\">" + errors.join("<br>") + "</div>");
+                <?php endif; ?>
+            });
+
 
 </script>
 	</body>
