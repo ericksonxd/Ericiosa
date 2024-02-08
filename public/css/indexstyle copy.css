@@ -13,6 +13,7 @@ html {
 	font-family: 'Poppins', sans-serif;
 }
 
+
 * {
 	margin: 0;
 	padding: 0;
@@ -33,10 +34,6 @@ html {
 	font-size: 3rem;
 }
 
-body{
-background-color: var(--background-color);
-
-}
 /* ********************************** */
 /*               HEADER               */
 /* ********************************** */
@@ -68,21 +65,20 @@ background-color: var(--background-color);
 	font-size: 1.4rem;
 }
 
+.like-button i {
+    color: black; /* o el color predeterminado del ícono */
+}
+
+.like-button.liked i {
+    color: red; /* Cambia el color según tu preferencia */
+}
+
+
 .container-logo {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 }
-
-
-
-img.logo-img{
-
-	height: 6rem;
-	width: 25rem;
-	object-fit: cover;
-	
-	 }
 
 .container-logo i {
 	font-size: 1rem;
@@ -102,6 +98,12 @@ img.logo-img{
 	cursor: pointer;
 }
 
+.logout-button{
+	font-size: 2rem;
+	color: var(--dark-color);
+
+
+}
 .container-user .fa-user {
 	font-size: 3rem;
 	color: var(--dark-color);
@@ -222,7 +224,7 @@ img.logo-img{
 /*               BANNER               */
 /* ********************************** */
 .banner {
-	background-image: linear-gradient(10deg, #565656, #62e4d957),
+	background-image: linear-gradient(10deg, #84d6d65d, #68ece146),
 		url('../css/images/banner.jpg');
 	height: 60rem;
 	background-size: cover;
@@ -253,7 +255,7 @@ img.logo-img{
 	margin-top: 2rem;
 	text-decoration: none;
 	color: #000000;
-	background-color:  #a1fffd;
+	background-color: #a1fffd;
 	display: inline-block;
 	padding: 1rem 3rem;
 	text-transform: uppercase;
@@ -342,87 +344,52 @@ img.logo-img{
 }
 
 .card-category {
-	height: 40rem;
+	height: 20rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	border-radius: 100%;
-	gap: 2rem;
-	box-shadow: 5px 5px 20px;
-}
-
-.card-holder {
-	height: auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content:center;
 	border-radius: 2rem;
 	gap: 2rem;
-	margin-top: 10px;
-	margin-bottom: 20px;
-	box-shadow: purple 3px 3px 20px;
-	background-color: rgb(71, 232, 230) ;
+	box-shadow: 5px 5px 20px rgb(255, 0, 255);
 }
-
-.card-holder h2{
-justify-content: baseline;
-}
-
 
 .card-category:hover{
 transition:0.3s ;
 	scale: 1.03;
+
 }
 
-.category-menta{
-	background-image: linear-gradient(#00000080, #51505080),
-		url('images/curso1.png');
+.category-encargos{
+	background-image: linear-gradient(#00000080, #00000080),
+		url('images/encargos.jpg');
 	background-size: cover;
 	background-position: bottom;
 	background-repeat: no-repeat;
 }
 
-.category-celeste {
-	background-image: linear-gradient(#00000080, #51505080),
-		url('images/curso2.png');
+
+.category-productos {
+	background-image: linear-gradient(#00000080, #00000080),
+		url('images/productos.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 }
 
-.category-violeta {
-	background-image: linear-gradient(#00000080, #51505080),	
-		url('images/curso3.png');
+.category-cursos {
+	background-image: linear-gradient(#00000080, #00000080),
+		url('images/cursos.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 }
 
 .card-category p {
-	font-size: 3rem;
+	font-size: 2.5rem;
+	color: #fff;
 	text-transform: capitalize;
 	position: relative;
-}
-
-.category-menta{
-	color: rgb(154, 255, 226);
-}
-
-.category-celeste{
-	color: #7dd1ff;
-}
-
-.category-violeta{
- color: #d9a0ff;
-}
-
-.logout-button{
-	font-size: 2rem;
-	color: var(--dark-color);
-
-
 }
 
 .card-category p::after {
@@ -491,16 +458,16 @@ transition:0.3s ;
 }
 
 .card-product {
-	background-color: #fff;
-	padding: 2rem 3rem;
-	border-radius: 0.5rem;
-	cursor: pointer;
-	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 2rem 3rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-.card-product:hover{
-	transition: 0.3s;
-	scale: 1.08;
+.card-product:hover {
+    transition: 0.3s;
+    scale: 1.08;
 }
 
 .container-img {
@@ -657,7 +624,7 @@ transition:0.3s ;
 	width: 100%; 
 	height: 100%;
 	object-fit: cover;
-	object-position: bottom;
+	object-position: center;
 	border-radius: 5px;
 }
 
@@ -672,7 +639,7 @@ transition:0.3s ;
 	width: 500px; 
 	height: 300px;
 	object-fit: cover;
-	object-position: bottom;
+	object-position: center;
 	border-radius: 5px;
 	grid-column: 2/4;
 	grid-row: 1/4;
@@ -1071,7 +1038,7 @@ color: black;
 	width: 500px; 
 	height: 300px;
 	object-fit: cover;
-	object-position: bottom;
+	object-position: center;
 	border-radius: 5px;
 }
 
@@ -1094,9 +1061,10 @@ a.product-link {
 
   a.product-link:hover{
 	
-	color: rgb(104, 80, 237);
+		color: var(--primary-color);
 	
   }
+
 
   @media (min-width: 769px) {
 	.menu {
@@ -1148,4 +1116,12 @@ a.product-link {
 	.menu-mobile a:hover {
 	   background-color: #000;
 	}
+ }
+
+ img.logo-img{
+
+height: 6rem;
+width: 25rem;
+object-fit: cover;
+
  }

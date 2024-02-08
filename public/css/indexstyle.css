@@ -3,8 +3,8 @@
 
 
 :root {
-	--primary-color: #26938a;
-	--background-color: #d4f8f5;
+	--primary-color: #37a89b;
+	--background-color: #acfffe;
 	--dark-color: #151515;
 }
 
@@ -38,7 +38,7 @@ html {
 /*               HEADER               */
 /* ********************************** */
 .container-hero {
-	background-color: var(--background-color);
+	background-color: #47e8e6;
 }
 
 .hero {
@@ -125,8 +125,8 @@ html {
 /* ************* NAVBAR ************* */
 .container-navbar {
 	background: #74ebd5; /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #74ebd5, #acb6e5); /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #74ebd5, #acb6e5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: -webkit-linear-gradient(to right, #74ebd5, #d57bed); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #2ce3c2, rgb(201, 105, 236)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .navbar {
@@ -224,7 +224,7 @@ html {
 /*               BANNER               */
 /* ********************************** */
 .banner {
-	background-image: linear-gradient(10deg, #565656, #62e4d957),
+	background-image: linear-gradient(10deg, #84d6d65d, #68ece146),
 		url('../css/images/banner.jpg');
 	height: 60rem;
 	background-size: cover;
@@ -255,7 +255,7 @@ html {
 	margin-top: 2rem;
 	text-decoration: none;
 	color: #000000;
-	background-color: var(--primary-color);
+	background-color: #a1fffd;
 	display: inline-block;
 	padding: 1rem 3rem;
 	text-transform: uppercase;
@@ -264,7 +264,7 @@ html {
 }
 
 .content-banner a:hover {
-	background: linear-gradient(to right, #74ebd5, #acb6e5); 
+	background: linear-gradient(to right, #a1ffee, rgb(206, 127, 224)); 
 
 }
 
@@ -290,7 +290,7 @@ html {
 	align-items: center;
 	justify-content: center;
 	gap: 1.5rem;
-	box-shadow: 5px 5px 20px;
+	box-shadow: 5px 5px 20px purple;
 
 	background-color: #fff;
 	border-radius: 1rem;
@@ -351,13 +351,14 @@ html {
 	justify-content: center;
 	border-radius: 2rem;
 	gap: 2rem;
-	box-shadow: 5px 5px 20px;
+	box-shadow: 5px 10px 20px purple;
 }
 
 .card-category:hover{
 transition:0.3s ;
 	scale: 1.03;
-}
+  filter: brightness(1.3) saturate(0.5) contrast(1.2);
+}	
 
 .category-encargos{
 	background-image: linear-gradient(#00000080, #00000080),
@@ -460,7 +461,7 @@ transition:0.3s ;
     padding: 2rem 3rem;
     border-radius: 0.5rem;
     cursor: pointer;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 20px purple;
 }
 
 .card-product:hover {

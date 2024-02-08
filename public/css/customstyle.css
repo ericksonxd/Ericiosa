@@ -3,8 +3,8 @@
 
 
 :root {
-	--primary-color: #a2e8ef;
-	--background-color: #d4f8f5;
+	--primary-color: #37a89b;
+	--background-color: #acfffe;
 	--dark-color: #151515;
 }
 
@@ -37,7 +37,7 @@ html {
 /*               HEADER               */
 /* ********************************** */
 .container-hero {
-	background-color: var(--background-color);
+	background-color: #47e8e6;
 }
 
 .hero {
@@ -119,8 +119,8 @@ img.logo-img{
 /* ************* NAVBAR ************* */
 .container-navbar {
 	background: #74ebd5; /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #74ebd5, #acb6e5); /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #74ebd5, #acb6e5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: -webkit-linear-gradient(to right, #74ebd5, #d57bed); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #2ce3c2, rgb(201, 105, 236)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .navbar {
@@ -249,7 +249,7 @@ img.logo-img{
 	margin-top: 2rem;
 	text-decoration: none;
 	color: #000000;
-	background-color: var(--primary-color);
+	background-color: #a1fffd;
 	display: inline-block;
 	padding: 1rem 3rem;
 	text-transform: uppercase;
@@ -258,7 +258,7 @@ img.logo-img{
 }
 
 .content-banner a:hover {
-	background: linear-gradient(to right, #74ebd5, #acb6e5); 
+	background: linear-gradient(to right, #a1ffee, rgb(206, 127, 224)); 
 
 }
 
@@ -1113,7 +1113,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .form-body .send{
    
-background-color: var(--primary-color); 
+background-color: var(--background-color); 
 border: none;
 
 
